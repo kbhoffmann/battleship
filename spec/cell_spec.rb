@@ -17,9 +17,16 @@
     expect(cell.ship).to eq (nil)
   end
 
-  it '#ship returns nil when empty' do
+  it '#empty? returns true empty' do
     cell = Cell.new("B4")
     expect(cell.empty?).to eq true
   end
-  
+
+  it '#place_ship puts a ship into cell' do
+    cruiser = Ship.new("Cruiser", 3)
+    cell = Cell.new("B4")
+    cell.place_ship(cruiser)
+    expect(cell.occupied.length).to eq 1
+  end
+
 end
