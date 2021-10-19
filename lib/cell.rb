@@ -11,14 +11,11 @@ class Cell
   end
 
   def ship
-    @occupied = []
     @occupied[0]
   end
 
   def empty?
-    if ship == nil
-      true
-    end
+    @occupied.empty?
   end
 
   def place_ship (ship_type)
