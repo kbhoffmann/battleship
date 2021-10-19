@@ -13,4 +13,10 @@ class Cell
     occupied = []
     occupied[0]
   end
+
+  def empty?
+    if ship == nil
+      true
+    end
+  end
 end

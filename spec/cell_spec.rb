@@ -16,4 +16,10 @@
     cell = Cell.new("B4")
     expect(cell.ship).to eq (nil)
   end
+
+  it '#ship returns nil when empty' do
+    cell = Cell.new("B4")
+    expect(cell.empty?).to eq true
+  end
+  
 end
