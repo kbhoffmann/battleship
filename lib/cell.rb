@@ -41,10 +41,16 @@ class Cell
 
   # #so far method does NOT contain the optional boolean argument described at the end of the iteration.
   # def render
-  def render
+  ## Added optional argument, will register as false unless argument true is placed in.
+  def render(contain_ship = false)
+
+    #"Register an S even if a ship hasn't been fired upon"
+    if contain_ship == true
+      "S"
+
     #"M" if the cell has been fired upon and it does NOT contain a ship(IS A MISS)
     #"." if the cell has NOT been fired upon.
-    if fired_upon? == false && empty? || fired_upon? == false && !empty?
+    elsif fired_upon? == false && empty? || fired_upon? == false && !empty?
       "."
     #"M" if the cell has been fired upon and it does NOT contain a ship(IS A MISS)
     #elsif fired_upon? && empty?
