@@ -88,12 +88,23 @@
     expect(cell_2.render).to eq("H")
   end
 
-  it 'can show if cell has been fired upon and hit and return status' do
+  it 'can show if cell has been fired upon and hit and returns not sunk' do
     cell_2 = Cell.new("C3")
     cruiser = Ship.new("Cruiser", 3)
 
     cell_2.place_ship(cruiser)
     cell_2.fire_upon
     expect(cruiser.sunk?).to eq(false)
+  end
+
+  it 'can show that ship is sunk after health is zero' do
+    cell_2 = Cell.new("C3")
+    cruiser = Ship.new("Cruiser", 3)
+
+    cell_2.place_ship(cruiser)
+    cell_2.fire_upon
+    cell_2.fire_upon
+    cell_2.fire_upon
+    expect(cruiser.sunk?).to eq(true)
   end
 end
