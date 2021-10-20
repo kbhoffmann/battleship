@@ -2,10 +2,10 @@
  require './lib/cell'
 
  describe Cell do
-   it 'exists' do
-     cell = Cell.new("B4")
-     expect(cell).to be_a Cell
-   end
+  it 'exists' do
+    cell = Cell.new("B4")
+    expect(cell).to be_a Cell
+  end
 
   it 'returns cell coordinate' do
     cell = Cell.new("B4")
@@ -37,6 +37,46 @@
     expect(cell.empty?).to eq false
   end
 
+  it 'can tell if it has been fired_upon' do
+    cell = Cell.new("B4")
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
 
+    expect(cell.fired_upon?).to be(false)
+  end
+
+  it 'can be fired upon' do
+    cell = Cell.new("B4")
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
+
+    cell.fire_upon
+    expect(cell.ship.health).to eq(2)
+    expect(cell.fired_upon?).to be(true)
+  end
+
+  it 'can show if an empty cell has been fired upon and return its status' do
+    cell_1 = Cell.new("B4")
+
+    expect(cell_1.render).to eq(".")
+    cell_1.fire_upon
+    expect(cell_1.render).to eq("M")
+  end
+
+  it 'when it has a ship, ship starts unfired upon' do
+    cell_2 = Cell.new("C3")
+    cruiser = Ship.new("Cruiser", 3)
+
+    cell_2.place_ship(cruiser)
+    expect(cell_2.render).to eq(".")
+  end
+
+  it '#render(true) registers an S when optional argument is true' do
+    cell_2 = Cell.new("C3")
+    cruiser = Ship.new("Cruiser", 3)
+
+    cell_2.place_ship(cruiser)
+    expect(cell_2.render(true)).to eq("S")
+  end
 
 end
