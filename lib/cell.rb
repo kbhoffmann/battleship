@@ -56,6 +56,9 @@ class Cell
     #elsif fired_upon? && empty?
     elsif fired_upon? && empty?
       "M"
+
+    elsif fired_upon? && !empty?
+      "H"
     end
     ##"H" if the cell has been fired upon AND it DOES contain a ship(IS A HIT)
     #elsif fired_upon? && !empty?
