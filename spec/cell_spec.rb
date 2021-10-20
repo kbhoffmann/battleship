@@ -107,4 +107,16 @@
     cell_2.fire_upon
     expect(cruiser.sunk?).to eq(true)
   end
+
+  it 'returns X if ship has been sunk' do
+    cell_2 = Cell.new("C3")
+    cruiser = Ship.new("Cruiser", 3)
+
+    cell_2.place_ship(cruiser)
+    cell_2.fire_upon
+    cell_2.fire_upon
+    cell_2.fire_upon
+    cruiser.sunk?
+      expect(cell_2.render).to eq("X")
+  end
 end
