@@ -117,6 +117,6 @@
     cell_2.fire_upon
     cell_2.fire_upon
     cruiser.sunk?
-      expect(cell_2.render).to eq("X")
+    expect(cell_2.render).to eq("X")
   end
 end
