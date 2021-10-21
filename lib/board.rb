@@ -17,4 +17,8 @@ class Board
   def valid_coordinate?(coordinate)
     @coordinates.include?(coordinate)
   end
+
+  def valid_placement?(ship_type, coordinates)
+    ship_type.length == coordinates.count
+  end 
 end
