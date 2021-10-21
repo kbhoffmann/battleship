@@ -37,6 +37,29 @@ RSpec.describe Board do
     expect(board.number_range(cruiser)).to be_a(Array)
   end
 
+  it "#letter_range returns the possible combo's" do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    expect(board.letter_range(cruiser).count).to eq(2)
+    expect(board.letter_range(cruiser)).to be_a(Array)
+  end
+
+  it "#number_separate returns the possible combo's" do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    expect(board.numbers_separate(["1","2","3"]).count).to eq(3)
+    expect(board.numbers_separate(["1","2","3"])).to be_a(Array)
+  end
+
+  it "#letter_separate returns the possible combo's" do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    expect(board.letters_separate(["A2","A3","A4"]).count).to eq(3)
+    expect(board.letters_separate(["A2","A3","A4"])).to be_a(Array)
+  end
 
   it 'Validates if a ship placement is true for ship length' do
     board = Board.new
