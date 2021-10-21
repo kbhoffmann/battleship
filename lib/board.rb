@@ -26,6 +26,14 @@ class Board
     end
   end
 
+  def all_same(array)
+    if array.all? { |x| x == array[0]}
+      true
+    else
+      false
+    end
+  end
+
   def valid_placement?(ship_type, coordinates)
     # This long group of .each and .map breaks up the coordinates into two arrays
     ## one with the letters in the coordinates and one with the numbers
@@ -61,15 +69,19 @@ class Board
     ## These are tests that can return boolean values to test placement
 
     # This returns a boolean if the letters or numbers are all the letter_same
-    letter_same = letter_array.all?
-    number_same = number_array.all?
+    
 
     ## My thoughts were if we could create tests that return booleans
     ## we could make a very simple if statement that just had all the tests
-    # test1 = letter_same
+    consecutive = consecutive_numbers(number_array)
     # test2 = letter_same == false
     # test3 = number_same
     # test4 = number_same == false
     # ship_legnth = ship_type.length == coordinates.count
+    if consecutive && letter_same
+      true
+    else
+      false
+    end
   end
 end
