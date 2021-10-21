@@ -41,7 +41,7 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
-    expect(board.valid_placement?(cruiser, ["A1","A2","A3"])).to eq(false)
+    expect(board.valid_placement?(cruiser, ["A1","A2","A4"])).to eq(false)
     expect(board.valid_placement?(submarine, ["A1","C1"])).to eq(false)
     expect(board.valid_placement?(cruiser, ["A3","A2","A1"])).to eq(false)
     expect(board.valid_placement?(submarine, ["C1","B1"])).to eq(false)
@@ -53,6 +53,17 @@ RSpec.describe Board do
     submarine = Ship.new("Submarine", 2)
     array = [1,2,3]
     expect(board.consecutive_numbers(array)).to eq(true)
+  end
+
+  it 'checks for all ncharacters same in an array' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    array = ["A","A","A"]
+    expect(board.all_same(array)).to eq(true)
+
+    array_2 = ["A","B","A"]
+    expect(board.all_same(array_2)).to eq(false)
   end
 
 
