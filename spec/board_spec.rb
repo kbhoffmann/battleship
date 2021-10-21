@@ -29,41 +29,16 @@ RSpec.describe Board do
     expect(board.valid_coordinate?("A22")).to be(false)
   end
 
-  it 'checks for consecutive numbers' do
+  it "#number_range returns the possible combo's" do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
-    array = [1,2,3]
-    expect(board.consecutive_numbers(array)).to eq(true)
-    array_2 = [1,3,2]
-    expect(board.consecutive_numbers(array_2)).to eq(false)
-    array_3 = [1,2]
-    expect(board.consecutive_numbers(array_3)).to eq(true)
-    array_4 = [1,3]
-    expect(board.consecutive_numbers(array_4)).to eq(false)
-  end
-
-  it 'checks for all characters same in an array' do
-    board = Board.new
-    cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2)
-    array = ["A","A","A"]
-    expect(board.all_same(array)).to eq(true)
-
-    array_2 = ["A","B","A"]
-    expect(board.all_same(array_2)).to eq(false)
-
-    array_3 = ["A","A"]
-    expect(board.all_same(array)).to eq(true)
-
-    array_4 = ["A","B"]
-    expect(board.all_same(array_2)).to eq(false)
-
-
+    expect(board.number_range(cruiser).count).to eq(2)
+    expect(board.number_range(cruiser)).to be_a(Array)
   end
 
 
-  xit 'Validates if a ship placement is true for ship length' do
+  it 'Validates if a ship placement is true for ship length' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -71,7 +46,7 @@ RSpec.describe Board do
     expect(board.valid_placement?(submarine, ["A2","A3","A4"])).to eq(false)
   end
 
-  xit 'Validates if a ship placement is true for consecutive coordinates' do
+  it 'Validates if a ship placement is true for consecutive coordinates' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
