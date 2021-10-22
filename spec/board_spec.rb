@@ -90,7 +90,7 @@ RSpec.describe Board do
     expect(board.valid_placement?(cruiser, ["B1", "C1", "D1"])).to eq(true)
   end
 
-  xit 'can place ships in its cells ' do
+  it 'can place ships in its cells ' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     board.place(cruiser, ["A1", "A2", "A3"])
