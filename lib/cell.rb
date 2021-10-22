@@ -19,7 +19,7 @@ class Cell
     @occupied.empty?
   end
 
-  def place_ship (ship_type)
+  def place_ship(ship_type)
     @occupied << ship_type
   end
 

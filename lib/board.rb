@@ -2,19 +2,20 @@ require './lib/ship'
 require './lib/cell'
 
 class Board
+  attr_reader :cell_hash
   def initialize
     @coordinates = ["A1", "A2", "A3", "A4",
                     "B1", "B2", "B3", "B4",
                     "C1", "C2", "C3", "C4",
                     "D1", "D2", "D3", "D4"]
+    @cell_hash = {}
   end
 
   def cells
-    cells = Hash.new
     @coordinates.each do |coordinate|
-     cells[coordinate] = Cell.new(coordinate)
+     @cell_hash[coordinate] = Cell.new(coordinate)
     end
-    cells
+    @cell_hash
   end
 
   def valid_coordinate?(coordinate)
@@ -75,11 +76,13 @@ class Board
   end
 
   def place(ship_type, coordinates)
+    @cell_hash
     coordinates.each do |coordinate|
       cell = Cell.new(coordinate)
       cell.place_ship(ship_type)
-      cells[coordinate] = cell
+      @cell_hash[coordinate] = cell
     end
+    @cell_hash
   end
-
+  require "pry"; binding.pry
 end
