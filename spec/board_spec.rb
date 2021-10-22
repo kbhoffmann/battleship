@@ -61,10 +61,20 @@ RSpec.describe Board do
     expect(board.letters_separate(["A2","A3","A4"])).to be_a(Array)
   end
 
+  it "#not_occupied returns true of cell does not have a ship" do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.cells
+    board.place(cruiser, ["A1", "A2", "A3"])
+    expect(board.not_occupied?(["A1","A2"])).to eq(false)
+    expect(board.not_occupied?(["B1","B2"])).to eq(true)
+  end
+
   it 'Validates if a ship placement is true for ship length' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+    board.cells
     expect(board.valid_placement?(cruiser, ["A1","A2"])).to eq(false)
     expect(board.valid_placement?(submarine, ["A2","A3","A4"])).to eq(false)
   end
@@ -73,6 +83,7 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+    board.cells
     expect(board.valid_placement?(cruiser, ["A1","A2","A4"])).to eq(false)
     expect(board.valid_placement?(submarine, ["A1","C1"])).to eq(false)
     expect(board.valid_placement?(cruiser, ["A3","A2","A1"])).to eq(false)
@@ -83,7 +94,7 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
-
+    board.cells
     expect(board.valid_placement?(cruiser, ["A1", "B2", "C3"])).to eq(false)
     expect(board.valid_placement?(submarine, ["C2", "D3"])).to eq(false)
     expect(board.valid_placement?(submarine, ["A1", "A2"])).to eq(true)
@@ -106,9 +117,10 @@ RSpec.describe Board do
     expect(cell_3.ship == cell_2.ship).to eq(true)
   end
 
-  xit 'can check if ships overlap' do
+  it 'can check if ships overlap' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
+    board.cells
     board.place(cruiser, ["A1", "A2", "A3"])
     submarine = Ship.new("Submarine", 2)
 
