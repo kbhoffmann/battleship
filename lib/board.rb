@@ -54,15 +54,30 @@ class Board
     end
   end
 
+  def filled_coordinate(coordinate)
+    @cell_hash[coordinate]
+  end
+
+
+  def not_occupied?(coordinates)
+    checker = []
+    coordinates.each do |coordinate|
+      if @cell_hash[coordinate].occupied.count == 1
+        checker << coordinate
+      end
+    end
+    checker.length == 0
+  end
+
 
   def valid_placement?(ship_type, coordinates)
     numbers_separate = numbers_separate(coordinates)
     letters_separate = letters_separate(coordinates)
     letter_range = letter_range(ship_type)
     number_range = number_range(ship_type)
+    basic_conditions = ship_type.length == coordinates.length
 
-
-    if ship_type.length == coordinates.length
+    if basic_conditions  && not_occupied?(coordinates)
       if number_range.include?(numbers_separate) && letter_range.include?(letters_separate) == false
         return true
       elsif number_range.include?(numbers_separate) == false && letter_range.include?(letters_separate)
@@ -75,13 +90,14 @@ class Board
     end
   end
 
+
   def place(ship_type, coordinates)
-    @cell_hash
     coordinates.each do |coordinate|
       cell = Cell.new(coordinate)
       cell.place_ship(ship_type)
       @cell_hash[coordinate] = cell
     end
-    @cell_hash
+    cell_hash
   end
+
 end
