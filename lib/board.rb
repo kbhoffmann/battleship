@@ -84,5 +84,4 @@ class Board
     end
     @cell_hash
   end
-  require "pry"; binding.pry
 end
