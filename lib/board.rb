@@ -1,3 +1,6 @@
+require './lib/ship'
+require './lib/cell'
+
 class Board
   def initialize
     @coordinates = ["A1", "A2", "A3", "A4",
@@ -18,70 +21,65 @@ class Board
     @coordinates.include?(coordinate)
   end
 
-  def consecutive_numbers(array)
-    if array.length == 3
-      cruiser_check = array.each_cons(3).any?{ |x,y| x == y - 1}
-    else
-      sub_check = array.each_cons(2).any?{ |x,y| x == y - 1}
+  def number_range(ship_type)
+    x = ship_type.length
+    number_range = []
+    (1..4).each_cons(x) do |numbers|
+      number_range << numbers
+    end
+    number_range
+  end
+
+  def letter_range(ship_type)
+    x = ship_type.length
+    letter_range = []
+    ("A".."D").each_cons(x) do |letters|
+      letter_range << letters
+    end
+    letter_range
+  end
+
+
+
+  def letters_separate(coordinates)
+    coordinates.map do |coordinate|
+      coordinate[0]
     end
   end
 
-  def all_same(array)
-    if array.all? { |x| x == array[0]}
-      true
-    else
-      false
+  def numbers_separate(coordinates)
+    coordinates.map do |coordinate|
+      coordinate[1].to_i
     end
   end
+
 
   def valid_placement?(ship_type, coordinates)
-    # This long group of .each and .map breaks up the coordinates into two arrays
-    ## one with the letters in the coordinates and one with the numbers
-    ### it also has them in order that they were entered
-    ### This could be made into a helper method, tried it and got errors
-    split_array = []
-    letter_array = []
-    number_array = []
-    letter_array_ord = []
-    # This seperates the coordinates into two seperate strings within the array.
-    coordinates.each do |coordinate|
-      split_array << coordinate.split("")
-    end
-    split_array
-    # This seperates the two strings into two arrays. One array with letters and one array with numbers
-    split_array.each do |letter|
-      letter_array << letter.first
-      number_array << letter.last.to_i
-    end
-    letter_array
-    number_array
-    # This creates a seperate array that converts the letters array into numbers to determine consecutive letters
-    letter_array.each do |letter|
-      letter_array_ord << letter.ord
-    end
-    letter_array
-
-    # number_consecutive = number_array.include?()
+    numbers_separate = numbers_separate(coordinates)
+    letters_separate = letters_separate(coordinates)
+    letter_range = letter_range(ship_type)
+    number_range = number_range(ship_type)
 
 
-
-    ## end of potential helper method
-    ## These are tests that can return boolean values to test placement
-
-    # This returns a boolean if the letters or numbers are all the letter_same
-    
-
-    ## My thoughts were if we could create tests that return booleans
-    ## we could make a very simple if statement that just had all the tests
-    consecutive = consecutive_numbers(number_array)
-    # test2 = letter_same == false
-    # test3 = number_same
-    # test4 = number_same == false
-    # ship_legnth = ship_type.length == coordinates.count
-    if consecutive && letter_same
-      true
+    if ship_type.length == coordinates.length
+      if number_range.include?(numbers_separate) && letter_range.include?(letters_separate) == false
+        return true
+      elsif number_range.include?(numbers_separate) == false && letter_range.include?(letters_separate)
+        return true
+      else
+        return false
+      end
     else
       false
     end
   end
+
+  def place(ship_type, coordinates)
+    coordinates.each do |coordinate|
+      cell = Cell.new(coordinate)
+      cell.place_ship(ship_type)
+      cells[coordinate] = cell
+    end
+  end
+
 end
