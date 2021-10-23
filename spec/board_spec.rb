@@ -128,31 +128,74 @@ RSpec.describe Board do
     expect(board.valid_placement?(submarine, ["B1", "B2"])).to eq(true)
   end
 
-  #wasn't sure what to name this test
-  xit 'can display itself' do
+  it 'can create an array of all rendered cells' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
+    board.cells
 
-    board.place(cruiser, ["A1", "A2", "A3"])
+    expect(board.render_array).to be_an(Array)
+    expect(board.render_array.length).to eq(16)
+  end
+
+  it 'can create the top row of board' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.cells
+
+    expect(board.board_top_row).to be_a(String)
+  end
+
+  it 'can display an empty board' do
+    board = Board.new
+    board.cells
 
     expected_1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
 
-    expected_2 = "  1 2 3 4 \n" +   #this is the same value as expected_1
-                 "A . . . . \n" +   #just better readability. Don't have to test
-                 "B . . . . \n" +   #both, but both should work!
-                 "C . . . . \n" +
-                 "D . . . . \n"
-
-    expected_3 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
-
-    expected_4 = "  1 2 3 4 \n" +   #this is the same value as expected_3
-                 "A S S S . \n" +   #the same situation as above, better readability
+    expected_2 = "  1 2 3 4 \n" +
+                 "A . . . . \n" +
                  "B . . . . \n" +
                  "C . . . . \n" +
                  "D . . . . \n"
+
     expect(board.render).to eq(expected_1)
     expect(board.render).to eq(expected_2)
-    expect(board.render(true)).to eq(expected_3)
-    expect(board.render(true)).to eq(expected_4)
+  end
+
+  it 'can display a board with a ship placed' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.cells
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    expected_1 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+
+    expected_2 = "  1 2 3 4 \n" +
+                 "A S S S . \n" +
+                 "B . . . . \n" +
+                 "C . . . . \n" +
+                 "D . . . . \n"
+
+    expect(board.render(true)).to eq(expected_1)
+    expect(board.render(true)).to eq(expected_2)
+  end
+
+  it 'can display another ship' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board.cells
+    board.place(cruiser, ["A1", "A2", "A3"])
+    board.place(submarine, ["C4", "D4"] )
+
+    expected_1 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . S \nD . . . S \n"
+
+    expected_2 = "  1 2 3 4 \n" +
+                 "A S S S . \n" +
+                 "B . . . . \n" +
+                 "C . . . S \n" +
+                 "D . . . S \n"
+
+    expect(board.render(true)).to eq(expected_1)
+    expect(board.render(true)).to eq(expected_2)
   end
 end
