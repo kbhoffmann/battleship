@@ -136,4 +136,12 @@ RSpec.describe Board do
     expect(board.render_array).to be_an(Array)
     expect(board.render_array.length).to eq(16)
   end
+
+  it 'can create the top row of board' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.cells
+
+    expect(board.board_top_row).to be_a(String)
+  end
 end
