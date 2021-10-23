@@ -1,15 +1,21 @@
 require './lib/ship'
 require './lib/cell'
+require './lib/game'
 
 class Board
   attr_reader :cell_hash,
-              :coordinates
+              :coordinates,
+              :cruiser_loc,
+              :sub_loc
+
   def initialize
     @coordinates = ["A1", "A2", "A3", "A4",
                     "B1", "B2", "B3", "B4",
                     "C1", "C2", "C3", "C4",
                     "D1", "D2", "D3", "D4"]
     @cell_hash = {}
+    @cruiser_loc = []
+    @sub_loc = []
   end
 
   def cells
@@ -129,5 +135,33 @@ class Board
      # => "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . ."
      bottom_row = d.insert(53, " \n")
      # => "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+  end
+
+
+  def cruiser_placement(ship_type)
+    valid_combo_cruiser = []
+    all_combos = coordinates.combination(3).to_a
+    all_combos.each do |combo|
+      if valid_placement?(ship_type, combo)
+        valid_combo_cruiser << combo
+      end
+    end
+    valid_combo_cruiser
+    @cruiser_loc = valid_combo_cruiser.shuffle.first
+    place(ship_type, @cruiser_loc)
+  end
+
+  def sub_placement(ship_type)
+    valid_combo_sub = []
+    all_combos = coordinates.combination(2).to_a
+    all_combos.each do |combo|
+      if valid_placement?(ship_type, combo)
+        valid_combo_sub << combo
+      end
+    end
+    valid_combo_sub
+
+    @sub_loc = valid_combo_sub.shuffle.first
+    place(ship_type, @sub_loc)
   end
 end
