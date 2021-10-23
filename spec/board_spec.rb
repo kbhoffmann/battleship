@@ -160,4 +160,22 @@ RSpec.describe Board do
     expect(board.render).to eq(expected_1)
     expect(board.render).to eq(expected_2)
   end
+
+  it 'can display a board with a ship placed' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.cells
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    expected_1 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+
+    expected_2 = "  1 2 3 4 \n" +
+                 "A S S S . \n" +
+                 "B . . . . \n" +
+                 "C . . . . \n" +
+                 "D . . . . \n"
+
+    expect(board.render(true)).to eq(expected_1)
+    expect(board.render(true)).to eq(expected_2)
+  end
 end
