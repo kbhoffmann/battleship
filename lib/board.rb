@@ -111,4 +111,16 @@ class Board
   end
   # =>  "  1 2 3 4 . . . . . . . . . . . . . . . ."
 
+  def render(contain_ship = false)
+     a = board_top_row.insert(10, "\n" + "A ")
+     # => "  1 2 3 4 \nA . . . . . . . . . . . . . . . ."
+     b = a.insert(20, " \n" + "B")
+     # => "  1 2 3 4 \nA . . . . \nB . . . . . . . . . . . ."
+     c = b.insert(31, " \n" + "C")
+     # => "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . . . . ."
+     d = c.insert(42, " \n" + "D")
+     # => "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . ."
+     bottom_row = d.insert(53, " \n")
+     # => "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+  end
 end
