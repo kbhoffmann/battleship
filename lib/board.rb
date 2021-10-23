@@ -2,7 +2,8 @@ require './lib/ship'
 require './lib/cell'
 
 class Board
-  attr_reader :cell_hash
+  attr_reader :cell_hash,
+              :coordinates
   def initialize
     @coordinates = ["A1", "A2", "A3", "A4",
                     "B1", "B2", "B3", "B4",
@@ -69,18 +70,24 @@ class Board
     checker.length == 0
   end
 
+  def unique_val_test?(coordinates)
+    coordinates.tally(&:uniq).count == 1
+  end
 
   def valid_placement?(ship_type, coordinates)
     numbers_separate = numbers_separate(coordinates)
     letters_separate = letters_separate(coordinates)
     letter_range = letter_range(ship_type)
     number_range = number_range(ship_type)
+    letters_unique = unique_val_test?(letters_separate)
+    numbers_unique = unique_val_test?(numbers_separate)
+
     basic_conditions = ship_type.length == coordinates.length
 
     if basic_conditions  && not_occupied?(coordinates)
-      if number_range.include?(numbers_separate) && letter_range.include?(letters_separate) == false
+      if number_range.include?(numbers_separate) && letters_unique
         return true
-      elsif number_range.include?(numbers_separate) == false && letter_range.include?(letters_separate)
+      elsif letter_range.include?(letters_separate) && numbers_unique
         return true
       else
         return false
