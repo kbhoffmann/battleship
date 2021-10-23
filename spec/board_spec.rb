@@ -128,31 +128,12 @@ RSpec.describe Board do
     expect(board.valid_placement?(submarine, ["B1", "B2"])).to eq(true)
   end
 
-  #wasn't sure what to name this test
-  xit 'can display itself' do
+  it 'can create an array of all rendered cells' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
+    board.cells
 
-    board.place(cruiser, ["A1", "A2", "A3"])
-
-    expected_1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
-
-    expected_2 = "  1 2 3 4 \n" +   #this is the same value as expected_1
-                 "A . . . . \n" +   #just better readability. Don't have to test
-                 "B . . . . \n" +   #both, but both should work!
-                 "C . . . . \n" +
-                 "D . . . . \n"
-
-    expected_3 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
-
-    expected_4 = "  1 2 3 4 \n" +   #this is the same value as expected_3
-                 "A S S S . \n" +   #the same situation as above, better readability
-                 "B . . . . \n" +
-                 "C . . . . \n" +
-                 "D . . . . \n"
-    expect(board.render).to eq(expected_1)
-    expect(board.render).to eq(expected_2)
-    expect(board.render(true)).to eq(expected_3)
-    expect(board.render(true)).to eq(expected_4)
+    expect(board.render_array).to be_an(Array)
+    expect(board.render_array.length).to eq(16)
   end
 end
