@@ -19,4 +19,5 @@ describe Game do
   #   answer = "q"
   #   expect(game.starter(answer)).to eq("Good Bye")
   #
+
 end
