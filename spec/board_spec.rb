@@ -144,4 +144,20 @@ RSpec.describe Board do
 
     expect(board.board_top_row).to be_a(String)
   end
+
+  it 'can display an empty board' do
+    board = Board.new
+    board.cells
+
+    expected_1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+
+    expected_2 = "  1 2 3 4 \n" +
+                 "A . . . . \n" +
+                 "B . . . . \n" +
+                 "C . . . . \n" +
+                 "D . . . . \n"
+
+    expect(board.render).to eq(expected_1)
+    expect(board.render).to eq(expected_2)
+  end
 end
