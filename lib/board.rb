@@ -90,7 +90,6 @@ class Board
     end
   end
 
-
   def place(ship_type, coordinates)
     coordinates.each do |coordinate|
       cell = Cell.new(coordinate)
@@ -100,4 +99,10 @@ class Board
     cell_hash
   end
 
+  def render_array
+    @cell_hash.map do |coordinate, cell_object|
+      cell_object.render(!not_occupied?([coordinate]))
+    end
+  end
+  # => [".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."]
 end
