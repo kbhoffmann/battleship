@@ -105,4 +105,10 @@ class Board
     end
   end
   # => [".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."]
+
+  def board_top_row
+    render_array.insert(0," ",1.to_s, 2.to_s, 3.to_s, 4.to_s).join(" ")
+  end
+  # =>  "  1 2 3 4 . . . . . . . . . . . . . . . ."
+
 end
