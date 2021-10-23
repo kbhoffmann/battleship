@@ -18,17 +18,5 @@ describe Game do
   #
   #   answer = "q"
   #   expect(game.starter(answer)).to eq("Good Bye")
-  # end
-
-  it 'computer places randomized ships' do
-    game = Game.new
-    cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2)
-    board_comp = Board.new
-    board_comp.cells
-    game.computer_placement
-    expect(game.valid_combo_cruiser.count).to eq (1)
-  end
-
-
+  #
 end
