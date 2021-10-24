@@ -232,6 +232,18 @@ RSpec.describe Board do
     expect(board.sub_loc.count).to eq (2)
   end
 
+  it 'checks player input and places_ship' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board.cells
+    player_choice = ["A1","A2","A3"]
+
+    expect(board.player_cruiser_placement(cruiser, player_choice)).to be_a(Hash)
+
+    player_choice_2 = ["A1","B2","A3"]
+    expect(board.player_cruiser_placement(cruiser,player_choice_2)).to eq false
+  end
 
 
 end
