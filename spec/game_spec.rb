@@ -2,6 +2,7 @@ require './lib/board'
 require './lib/cell'
 require './lib/ship'
 require './lib/game'
+require 'pry'
 
 describe Game do
   it 'exists' do
@@ -10,14 +11,67 @@ describe Game do
     expect(game).to be_a Game
   end
 
-  # it 'takes user input and starts game' do
-  #   game = Game.new
-  #   answer = "p"
-  #
-  #   expect(game.starter(answer)).to eq("Game will start")
-  #
-  #   answer = "q"
-  #   expect(game.starter(answer)).to eq("Good Bye")
-  #
+  it 'formats player input for cruiser' do
+    game = Game.new
 
+    expect(game.player_cruiser_coords_formatted).to be_an(Array)
+    expect(game.player_cruiser_coords_formatted.length).to eq(3)
+  end
+
+  xit 'checks if player ship placement is valid and gives output' do
+    game = Game.new
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board.cells
+    board.place(cruiser, ["B2", "B3", "B4"])
+
+    expect(game.method_goes_here).to eq(true)
+    board.place(cruiser, ["B2", "D3", "B4"])
+    expect(game.method_goes_here).to eq(false)
+  end
+
+  xit 'can let the player place a cruiser ship' do
+    game = Game.new
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board.cells
+    board.place(cruiser, ["B2", "B3", "B4"])
+
+    expected_1 = "  1 2 3 4 \nA . . . . \nB . S S S \nC . . . . \nD . . . . \n"
+
+    expected_2 = "  1 2 3 4 \n" +
+                 "A . . . . \n" +
+                 "B . S S S \n" +
+                 "C . . . . \n" +
+                 "D . . . . \n"
+
+    expect(game.cruiser_placement.length).to eq(3)
+    expect(game.board.render(true)).to eq(expected_1)
+    expect(game.board.render(true)).to eq(expected_2)
+  end
+
+  xit 'can let the player place a submarine' do
+    game = Game.new
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board.cells
+
+    board.place(cruiser, ["B2", "B3", "B4"])
+    board.place(submarine, ["C1", "D1"] )
+
+    expected_1 = "  1 2 3 4 \nA . . . . \nB . S S S \nC S . . . \nD S . . . \n"
+
+    expected_2 = "  1 2 3 4 \n" +
+                 "A . . . . \n" +
+                 "B . S S S \n" +
+                 "C S . . . \n" +
+                 "D S . . . \n"
+
+    expect(game.sub_placement.length).to eq(3)
+    expect(game.board.render(true)).to eq(expected_1)
+    expect(game.board.render(true)).to eq(expected_2)
+  end
 end
