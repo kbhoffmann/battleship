@@ -4,14 +4,35 @@ require './lib/ship'
 
 board = Board.new
 cruiser = Ship.new("Cruiser", 3)
-board.place(cruiser, ["A1", "A2", "A3"])
-cell_1 = board.cells["A1"]
-cell_2 = board.cells["A2"]
-cell_3 = board.cells["A3"]
+submarine = Ship.new("Submarine", 2)
+board.cells
 
-cell_1.ship
-cell_2.ship
-cell_3.ship
+all_combos = board.coordinates.combination(3).to_a
 
-p cell_3
-puts board.cells
+
+valid_combo = []
+all_combos.each do |combo|
+  if board.valid_placement?(cruiser, combo)
+    valid_combo << combo
+  end
+end
+valid_combo
+
+
+cruiser_placement = valid_combo.shuffle.first
+p cruiser_placement
+board.place(cruiser, cruiser_placement)
+
+
+all_combos = board.coordinates.combination(2).to_a
+
+valid_combo_sub = []
+all_combos.each do |combo|
+  if board.valid_placement?(submarine, combo)
+    valid_combo_sub << combo
+  end
+end
+valid_combo_sub
+
+sub_placement = valid_combo_sub.shuffle.first
+p sub_placement

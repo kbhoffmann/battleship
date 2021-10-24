@@ -70,6 +70,20 @@ RSpec.describe Board do
     expect(board.not_occupied?(["B1","B2"])).to eq(true)
   end
 
+  it "#unique_val_test? returns true if all values in array are the same" do
+    board = Board.new
+    array = ["A", "A", "A"]
+    array_2 = ["A", "A", "B"]
+    array_3 = ["1", "1", "1"]
+    array_4 = ["1", "2", "1"]
+    expect(board.unique_val_test?(array)).to eq(true)
+    expect(board.unique_val_test?(array_2)).to eq(false)
+    expect(board.unique_val_test?(array_3)).to eq(true)
+    expect(board.unique_val_test?(array_4)).to eq(false)
+  end
+
+
+
   it 'Validates if a ship placement is true for ship length' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
@@ -198,4 +212,26 @@ RSpec.describe Board do
     expect(board.render(true)).to eq(expected_1)
     expect(board.render(true)).to eq(expected_2)
   end
+
+  it 'computer places cruiser in random valid location' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board.cells
+    board.cruiser_placement(cruiser)
+    expect(board.cruiser_loc.count).to eq (3)
+  end
+
+  it 'computer places sub in random valid location' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board.cells
+    board.cruiser_placement(cruiser)
+    board.sub_placement(submarine)
+    expect(board.sub_loc.count).to eq (2)
+  end
+
+
+
 end
