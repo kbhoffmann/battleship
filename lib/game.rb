@@ -39,15 +39,16 @@ class Game
       B . . . .
       C . . . .
       D . . . .
-      Enter the 3 sets of coordinates for the Cruiser (example: a4b4c4 ):"
+      Enter the 3 sets of coordinates for the Cruiser (example: A4 B4 C4 ):"
       #need them separated by comma? no commas? no spaces? change our code to be case insensitive?
-      gets.chomp
+      cruiser_player_input = gets.chomp
   end
 
   def player_cruiser_coords_formatted
     #mocking the gets.chomp, will have to remove this variable later
-    player_cruiser_placement_instructions = "a1b1c1"
-    player_cruiser_placement_instructions.upcase.scan(/../)
+    cruiser_player_input = "A4 B4 C4"
+    binding.pry
+    player_cruiser_placement_instructions.split
       #=> ["A1", "B1", "C1"]
   end
 
@@ -55,6 +56,7 @@ class Game
   #------------------------------------------------------
   #This is where I left off for now.  Ran into issues, may need to rethink some things(sorry I know thats vague)
     def check_player_cruiser_placement_coords(coordinates)
+      binding.pry
       #?MAYBE MAKE VALID PLACEMENT A MODULE INSTEAD OF LEAVING IT IN BOARD CLASS??? or recreate valid placement in game
       # coordinates = player_cruiser_coords_formatted
       if @player_board.valid_placement?(@player_cruiser, coordinates)
