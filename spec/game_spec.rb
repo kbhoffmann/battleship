@@ -24,5 +24,10 @@ describe Game do
     expect(game.player_cruiser).to be_an_instance_of(Ship)
     expect(game.player_sub).to be_an_instance_of(Ship)
   end
+  it 'formats player input for cruiser' do
+    game = Game.new
 
+    expect(game.player_cruiser_coords_formatted).to be_an(Array)
+    expect(game.player_cruiser_coords_formatted.length).to eq(3)
+  end
 end
