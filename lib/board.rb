@@ -13,16 +13,17 @@ class Board
                     "B1", "B2", "B3", "B4",
                     "C1", "C2", "C3", "C4",
                     "D1", "D2", "D3", "D4"]
-    @cell_hash = {}
+    @cell_hash = cells
     @cruiser_loc = []
     @sub_loc = []
   end
 
   def cells
+    cell_container = {}
     @coordinates.each do |coordinate|
-     @cell_hash[coordinate] = Cell.new(coordinate)
+     cell_container[coordinate] = Cell.new(coordinate)
     end
-    @cell_hash
+    cell_container
   end
 
   def valid_coordinate?(coordinate)
@@ -103,28 +104,25 @@ class Board
     end
   end
 
-  def place(ship_type, coordinates)
-    coordinates.each do |coordinate|
-      cell = Cell.new(coordinate)
-      cell.place_ship(ship_type)
-      @cell_hash[coordinate] = cell
-    end
-    cell_hash
+  def place(ship_type, coords)
+    coords.each do |coordinate|
+      @cell_hash[coordinate].place_ship(ship_type)
+    end    # cell_hash
   end
 
-  def render_array(contain_ship = false)
-    if contain_ship == true
-    x = @cell_hash.map do |coordinate, cell_object|
-          cell_object.render(!not_occupied?([coordinate]))
-      end
+  # def render_array(contain_ship = false)
+  #   if contain_ship == true
+  #   x = @cell_hash.map do |coordinate, cell_object|
+  #         cell_object.render(!not_occupied?([coordinate]))
+  #     end
+  #
+  #   else
+  #   y =  @cell_hash.map do |coordinate, cell_object|
+  #       cell_object.render(contain_ship)
+  #     end
+  #   end
 
-    else
-    y =  @cell_hash.map do |coordinate, cell_object|
-        cell_object.render(contain_ship)
-      end
-    end
 
-  end
 
   def render(contain_ship = false)
     if contain_ship == true
@@ -178,5 +176,4 @@ class Board
       return false
     end
   end
-
 end
