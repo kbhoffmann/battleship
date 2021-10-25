@@ -1,4 +1,3 @@
-
 require './lib/board'
 require './lib/cell'
 require './lib/ship'
@@ -56,50 +55,55 @@ class Game
     player_input = gets.chomp
     # cruiser_player_input = "A4 B4 C4"
     player_input = player_input.split
-      #=> ["A1", "B1", "C1"]
+    #=> ["A1", "B1", "C1"]
     player_input
   end
 
-
-  #------------------------------------------------------
-  #This is where I left off for now.  Ran into issues, may need to rethink some things(sorry I know thats vague)
-    def check_player_cruiser_placement_coords(coordinates)
-
-      #?MAYBE MAKE VALID PLACEMENT A MODULE INSTEAD OF LEAVING IT IN BOARD CLASS??? or recreate valid placement in game
-      # coordinates = player_cruiser_coords_formatted
-      if @player_board.valid_placement?(@player_cruiser, coordinates)
-        #if true, proceed to place_player_cruiser method
-        #proceed to the method to prompt user to place submarine.
-      elsif board.valid_placement? == false
-        p "Those coordinates are invalid, try again. (example: a4, b4, c4 )"
-        player_cruiser_placement = gets.chomp
-      end
-    end
-
-    def player_sub_placement_instructions
-        puts "You now need to place the Submarine
-        The Submarine is two units long.  Choose coordinates that do not include you Cruiser (denoted by 'S')
-        Enter the 2 sets of coordinates for the Submarine (example: a4, b4 ):"
-        # show player board after cruiser placement
-        #need input separated by comma? no commas? no spaces? change our code to be case insensitive?
-        player_sub_placement = gets.chomp
-        #need to put user input into an array such as ["A1","A2"] SEE player_sub_coords_formatted method
-        check_player_sub_placement_coords
-    end
-
-    def player_sub_coords_formatted
-      #CONVERT STRING FROM GETS.CHOMP TO AN ARRAY OF 2 ELEMENTS
-    end
-
-    def check_player_sub_placement_coords
-      #?MAYBE MAKE VALID PLACEMENT A MODULE INSTEAD OF LEAVING IT IN BOARD CLASS??? or recreate valid placement in game
-      if player_sub_coords_formatted.board.valid_placement?
-        #if true, proceed to place_player_sub method
-        #then proceed to method for the TURN???
-      elsif player_sub_coords_formatted.board.valid_placement? == false
-        p "Those coordinates are invalid, try again. (example: a4, b4 )"
-        player_cruiser_placement = gets.chomp
-      end
-    end
-
+  def display_boards(computer_board, player_board)
+    puts "=============COMPUTER BOARD============="
+    puts "#{computer_board}"
+    puts "==============PLAYER BOARD=============="
+    puts "#{player_board}"
+  end
 end
+
+# #------------------------------------------------------
+# #This is where I left off for now.  Ran into issues, may need to rethink some things(sorry I know thats vague)
+#   def check_player_cruiser_placement_coords(coordinates)
+#
+#     #?MAYBE MAKE VALID PLACEMENT A MODULE INSTEAD OF LEAVING IT IN BOARD CLASS??? or recreate valid placement in game
+#     # coordinates = player_cruiser_coords_formatted
+#     if @player_board.valid_placement?(@player_cruiser, coordinates)
+#       #if true, proceed to place_player_cruiser method
+#       #proceed to the method to prompt user to place submarine.
+#     elsif board.valid_placement? == false
+#       p "Those coordinates are invalid, try again. (example: a4, b4, c4 )"
+#       player_cruiser_placement = gets.chomp
+#     end
+#   end
+#
+#   def player_sub_placement_instructions
+#       puts "You now need to place the Submarine
+#       The Submarine is two units long.  Choose coordinates that do not include you Cruiser (denoted by 'S')
+#       Enter the 2 sets of coordinates for the Submarine (example: a4, b4 ):"
+#       # show player board after cruiser placement
+#       #need input separated by comma? no commas? no spaces? change our code to be case insensitive?
+#       player_sub_placement = gets.chomp
+#       #need to put user input into an array such as ["A1","A2"] SEE player_sub_coords_formatted method
+#       check_player_sub_placement_coords
+#   end
+#
+#   def player_sub_coords_formatted
+#     #CONVERT STRING FROM GETS.CHOMP TO AN ARRAY OF 2 ELEMENTS
+#   end
+#
+#   def check_player_sub_placement_coords
+#     #?MAYBE MAKE VALID PLACEMENT A MODULE INSTEAD OF LEAVING IT IN BOARD CLASS??? or recreate valid placement in game
+#     if player_sub_coords_formatted.board.valid_placement?
+#       #if true, proceed to place_player_sub method
+#       #then proceed to method for the TURN???
+#     elsif player_sub_coords_formatted.board.valid_placement? == false
+#       p "Those coordinates are invalid, try again. (example: a4, b4 )"
+#       player_cruiser_placement = gets.chomp
+#     end
+#   end
