@@ -164,4 +164,14 @@ class Board
     @sub_loc = valid_combo_sub.shuffle.first
     place(ship_type, @sub_loc)
   end
+
+  def player_ship_placement(ship_type, coordinates)
+    if valid_placement?(ship_type,coordinates)
+      place(ship_type, coordinates)
+    else
+      puts "Those are invalid coordinates. Please try again:"
+      ## Was not sure how to get this to repeat, need to look at this
+    end
+  end
+
 end
