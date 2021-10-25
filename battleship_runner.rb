@@ -32,5 +32,9 @@ puts "The Cruiser is three units long and the Submarine is two units long."
 puts board_player.render
 puts "Enter the squares for the Cruiser (3 spaces):"
 # game.player_cruiser_coords_formatted
-board_player.player_ship_placement(cruiser_player, game.player_cruiser_coords_formatted)
-puts board_player.cell_hash
+board_player.player_ship_placement(cruiser_player, game.player_coords_formatted)
+puts board_player.render(true)
+puts "Enter the squares for the Submarine (2 spaces):"
+board_player.player_ship_placement(submarine_player, game.player_coords_formatted)
+puts board_player.render(true)
+puts board_comp.render(true) # This is just to make sure we are ready to run turn.
