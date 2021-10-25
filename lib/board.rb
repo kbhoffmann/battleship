@@ -169,7 +169,8 @@ class Board
     if valid_placement?(ship_type,coordinates)
       place(ship_type, coordinates)
     else
-      false
+      puts "Those are invalid coordinates. Please try again:"
+      ## Was not sure how to get this to repeat, need to look at this
     end
   end
 
