@@ -165,11 +165,12 @@ class Board
     place(ship_type, @sub_loc)
   end
 
-  def player_cruiser_placement(ship_type, coordinates)
+  def player_ship_placement(ship_type, coordinates)
     if valid_placement?(ship_type,coordinates)
       place(ship_type, coordinates)
     else
       false
     end
   end
+
 end
