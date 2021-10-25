@@ -3,60 +3,71 @@ require './lib/cell'
 require './lib/ship'
 
 class Game
-  # attr_reader :board_player,
-  #             :cruiser_player,
-  #             :submarine_player,
-  #             :board_comp,
-  #             :cruiser_comp,
-  #             :submarine_comp
+  attr_reader :board_player,
+              :cruiser_player,
+              :submarine_player,
+              :board_comp,
+              :cruiser_comp,
+              :submarine_comp
 
   def initialize
-    # @board_player = Board.new
-    # @cruiser_player = Ship.new("Cruiser", 3)
-    # @submarine_player = Ship.new("Submarine", 2)
-    # @board_comp = Board.new
-    # @cruiser_comp = Ship.new("Cruiser", 3)
-    # @submarine_comp = Ship.new("Submarine", 2)
-
+    @board_comp = Board.new
+    @board_player = Board.new
+    @cruiser_player = Ship.new("Cruiser", 3)
+    @submarine_player = Ship.new("Submarine", 2)
+    @cruiser_comp = Ship.new("Cruiser", 3)
+    @submarine_comp = Ship.new("Submarine", 2)
   end
 
-  def starter(answer)
+  def welcome_message
+    puts "Welcome to BATTLESHIP"
+    puts "Enter p to play. Enter q to quit."
+  end
+
+  def starter
+    welcome_message
+    answer = gets.chomp.downcase
     if answer == "p"
-      p "Game will start"
-      #Computer places ships on computer board, then player is prompt to place cruiser
-      # player_cruiser_placement_instructions
+      play_game
+
     elsif answer == "q"
       p "Good Bye"
       exit!
     else
       p "Invalid Response"
-      puts "Enter p to play. Enter q to quit."
-      new_answer = gets.chomp
-      self.starter(new_answer)
+      self.starter
     end
-
   end
-  # def player_cruiser_placement_instructions
-  #     puts "I have laid out my ships on the grid.
-  #     You now need to lay out your two ships.
-  #     The Cruiser is three units long and the Submarine is two units long.
-  #       1 2 3 4
-  #     A . . . .
-  #     B . . . .
-  #     C . . . .
-  #     D . . . .
-  #     Enter the 3 sets of coordinates for the Cruiser (example: A4 B4 C4 ):"
-  #     #need them separated by comma? no commas? no spaces? change our code to be case insensitive?
-  #     cruiser_player_input = gets.chomp
-  # end
 
-  def player_coords_formatted
-    #mocking the gets.chomp, will have to remove this variable later
+  def play_game
+    @board_comp.cruiser_placement(@cruiser_comp)
+    @board_comp.sub_placement(@submarine_comp)
+    require "pry"; binding.pry
+    player_place_text
+    player_choice(@cruiser_player)
+    puts board_player.render(true)
+    puts "Enter the squares for the Submarine (2 spaces):"
+    player_choice(@submarine_player)
+    display_boards(board_comp.render, board_player.render(true))
+    until game_over?
+      # Game logic
+
+    end
+    end_game_message
+    self.starter
+  end
+
+  def player_place_text
+    puts "I have laid out my ships on the grid."
+    puts "You now need to lay out your two ships."
+    puts "The Cruiser is three units long and the Submarine is two units long."
+    puts board_player.render(true)
+    puts "Enter the squares for the Cruiser (3 spaces):"
+  end
+
+  def play_choice(ship_type)
     player_input = gets.chomp
-    # cruiser_player_input = "A4 B4 C4"
-    player_input = player_input.split
-    #=> ["A1", "B1", "C1"]
-    player_input
+    board_player.player_ship_placement(ship_type, player_input.split)
   end
 
   def display_boards(computer_board, player_board)
@@ -65,45 +76,17 @@ class Game
     puts "==============PLAYER BOARD=============="
     puts "#{player_board}"
   end
-end
 
-# #------------------------------------------------------
-# #This is where I left off for now.  Ran into issues, may need to rethink some things(sorry I know thats vague)
-#   def check_player_cruiser_placement_coords(coordinates)
-#
-#     #?MAYBE MAKE VALID PLACEMENT A MODULE INSTEAD OF LEAVING IT IN BOARD CLASS??? or recreate valid placement in game
-#     # coordinates = player_cruiser_coords_formatted
-#     if @player_board.valid_placement?(@player_cruiser, coordinates)
-#       #if true, proceed to place_player_cruiser method
-#       #proceed to the method to prompt user to place submarine.
-#     elsif board.valid_placement? == false
-#       p "Those coordinates are invalid, try again. (example: a4, b4, c4 )"
-#       player_cruiser_placement = gets.chomp
-#     end
-#   end
-#
-#   def player_sub_placement_instructions
-#       puts "You now need to place the Submarine
-#       The Submarine is two units long.  Choose coordinates that do not include you Cruiser (denoted by 'S')
-#       Enter the 2 sets of coordinates for the Submarine (example: a4, b4 ):"
-#       # show player board after cruiser placement
-#       #need input separated by comma? no commas? no spaces? change our code to be case insensitive?
-#       player_sub_placement = gets.chomp
-#       #need to put user input into an array such as ["A1","A2"] SEE player_sub_coords_formatted method
-#       check_player_sub_placement_coords
-#   end
-#
-#   def player_sub_coords_formatted
-#     #CONVERT STRING FROM GETS.CHOMP TO AN ARRAY OF 2 ELEMENTS
-#   end
-#
-#   def check_player_sub_placement_coords
-#     #?MAYBE MAKE VALID PLACEMENT A MODULE INSTEAD OF LEAVING IT IN BOARD CLASS??? or recreate valid placement in game
-#     if player_sub_coords_formatted.board.valid_placement?
-#       #if true, proceed to place_player_sub method
-#       #then proceed to method for the TURN???
-#     elsif player_sub_coords_formatted.board.valid_placement? == false
-#       p "Those coordinates are invalid, try again. (example: a4, b4 )"
-#       player_cruiser_placement = gets.chomp
-#     end
-#   end
+  def end_game_message
+    if #player wins
+      p "You won!"
+    else
+      p "I won!"
+    end
+  end
+
+
+  def game_over?
+  end
+
+end
