@@ -29,7 +29,7 @@ p board_comp.sub_loc
 puts "I have laid out my ships on the grid."
 puts "You now need to lay out your two ships."
 puts "The Cruiser is three units long and the Submarine is two units long."
-puts board_player.render
+puts board_player.render(true)
 puts "Enter the squares for the Cruiser (3 spaces):"
 # game.player_cruiser_coords_formatted
 board_player.player_ship_placement(cruiser_player, game.player_coords_formatted)
@@ -39,4 +39,4 @@ board_player.player_ship_placement(submarine_player, game.player_coords_formatte
 puts board_player.render(true)
 puts board_comp.render(true) # This is just to make sure we are ready to run turn.
 
-game.display_boards(board_comp.render, board_player.render)
+game.display_boards(board_comp.render, board_player.render(true))
