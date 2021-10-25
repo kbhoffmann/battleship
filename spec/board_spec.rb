@@ -239,11 +239,27 @@ RSpec.describe Board do
     board.cells
     player_choice = ["A1","A2","A3"]
 
-    expect(board.player_cruiser_placement(cruiser, player_choice)).to be_a(Hash)
+    expect(board.player_ship_placement(cruiser, player_choice)).to be_a(Hash)
 
     player_choice_2 = ["A1","B2","A3"]
-    expect(board.player_cruiser_placement(cruiser,player_choice_2)).to eq false
+
+    expect(board.player_ship_placement(cruiser,player_choice_2)).to eq false
   end
 
+
+  it 'Able to place a ship, then place a second ship' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board.cells
+    player_choice = ["A1","A2","A3"]
+    board.player_ship_placement(cruiser, player_choice)
+    player_choice_2 = ["B2","B3"]
+
+    expect(board.player_ship_placement(submarine,player_choice_2)).to be_a(Hash)
+
+    player_choice_3 = ["B2","A3"]
+    expect(board.player_ship_placement(submarine,player_choice_3)).to eq false
+  end
 
 end
