@@ -4,16 +4,21 @@ require './lib/cell'
 require './lib/ship'
 
 class Game
-  attr_reader :player_board,
-              :player_cruiser,
-              :player_sub
+  # attr_reader :board_player,
+  #             :cruiser_player,
+  #             :submarine_player,
+  #             :board_comp,
+  #             :cruiser_comp,
+  #             :submarine_comp
 
   def initialize
-    @player_board = Board.new
-    @player_cruiser = Ship.new("Cruiser", 3)
-    @player_sub = Ship.new("Submarine", 2)
-    @player_cruiser_input = nil
-    @player_sub_input = nil
+    # @board_player = Board.new
+    # @cruiser_player = Ship.new("Cruiser", 3)
+    # @submarine_player = Ship.new("Submarine", 2)
+    # @board_comp = Board.new
+    # @cruiser_comp = Ship.new("Cruiser", 3)
+    # @submarine_comp = Ship.new("Submarine", 2)
+
   end
 
   def starter(answer)
@@ -50,9 +55,9 @@ class Game
     #mocking the gets.chomp, will have to remove this variable later
     player_input = gets.chomp
     # cruiser_player_input = "A4 B4 C4"
-    @player_input = player_input.split
+    player_input = player_input.split
       #=> ["A1", "B1", "C1"]
-    @player_input
+    player_input
   end
 
 
