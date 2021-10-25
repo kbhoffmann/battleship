@@ -38,3 +38,5 @@ puts "Enter the squares for the Submarine (2 spaces):"
 board_player.player_ship_placement(submarine_player, game.player_coords_formatted)
 puts board_player.render(true)
 puts board_comp.render(true) # This is just to make sure we are ready to run turn.
+
+game.display_boards(board_comp.render, board_player.render)
