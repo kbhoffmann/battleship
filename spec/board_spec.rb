@@ -82,8 +82,6 @@ RSpec.describe Board do
     expect(board.unique_val_test?(array_4)).to eq(false)
   end
 
-
-
   it 'Validates if a ship placement is true for ship length' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
@@ -142,23 +140,6 @@ RSpec.describe Board do
     expect(board.valid_placement?(submarine, ["B1", "B2"])).to eq(true)
   end
 
-  it 'can create an array of all rendered cells' do
-    board = Board.new
-    cruiser = Ship.new("Cruiser", 3)
-    board.cells
-
-    expect(board.render_array).to be_an(Array)
-    expect(board.render_array.length).to eq(16)
-  end
-
-  it 'can create the top row of board' do
-    board = Board.new
-    cruiser = Ship.new("Cruiser", 3)
-    board.cells
-
-    expect(board.board_top_row).to be_a(String)
-  end
-
   it 'can display an empty board' do
     board = Board.new
     board.cells
@@ -189,8 +170,15 @@ RSpec.describe Board do
                  "C . . . . \n" +
                  "D . . . . \n"
 
+    expected_empty = "  1 2 3 4 \n" +
+                     "A . . . . \n" +
+                     "B . . . . \n" +
+                     "C . . . . \n" +
+                     "D . . . . \n"
+
     expect(board.render(true)).to eq(expected_1)
     expect(board.render(true)).to eq(expected_2)
+    expect(board.render).to eq(expected_empty)
   end
 
   it 'can display another ship' do
