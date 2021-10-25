@@ -126,42 +126,21 @@ class Board
 
   end
 
-def render(contain_ship = false)
-  if contain_ship == true
-    "  1 2 3 4 \n" +
-      "A #{@cell_hash["A1"].render(true)} #{@cell_hash["A2"].render(true)} #{@cell_hash["A3"].render(true)} #{@cell_hash["A4"].render(true)} \n" +
-      "B #{@cell_hash["B1"].render(true)} #{@cell_hash["B2"].render(true)} #{@cell_hash["B3"].render(true)} #{@cell_hash["B4"].render(true)} \n" +
-      "C #{@cell_hash["C1"].render(true)} #{@cell_hash["C2"].render(true)} #{@cell_hash["C3"].render(true)} #{@cell_hash["C4"].render(true)} \n" +
-      "D #{@cell_hash["D1"].render(true)} #{@cell_hash["D2"].render(true)} #{@cell_hash["D3"].render(true)} #{@cell_hash["D4"].render(true)} \n"
-  else
-    "  1 2 3 4 \n" +
-      "A #{@cell_hash["A1"].render} #{@cell_hash["A2"].render} #{@cell_hash["A3"].render} #{@cell_hash["A4"].render} \n" +
-      "B #{@cell_hash["B1"].render} #{@cell_hash["B2"].render} #{@cell_hash["B3"].render} #{@cell_hash["B4"].render} \n" +
-      "C #{@cell_hash["C1"].render} #{@cell_hash["C2"].render} #{@cell_hash["C3"].render} #{@cell_hash["C4"].render} \n" +
-      "D #{@cell_hash["D1"].render} #{@cell_hash["D2"].render} #{@cell_hash["D3"].render} #{@cell_hash["D4"].render} \n"
+  def render(contain_ship = false)
+    if contain_ship == true
+      "  1 2 3 4 \n" +
+        "A #{@cell_hash["A1"].render(true)} #{@cell_hash["A2"].render(true)} #{@cell_hash["A3"].render(true)} #{@cell_hash["A4"].render(true)} \n" +
+        "B #{@cell_hash["B1"].render(true)} #{@cell_hash["B2"].render(true)} #{@cell_hash["B3"].render(true)} #{@cell_hash["B4"].render(true)} \n" +
+        "C #{@cell_hash["C1"].render(true)} #{@cell_hash["C2"].render(true)} #{@cell_hash["C3"].render(true)} #{@cell_hash["C4"].render(true)} \n" +
+        "D #{@cell_hash["D1"].render(true)} #{@cell_hash["D2"].render(true)} #{@cell_hash["D3"].render(true)} #{@cell_hash["D4"].render(true)} \n"
+    else
+      "  1 2 3 4 \n" +
+        "A #{@cell_hash["A1"].render} #{@cell_hash["A2"].render} #{@cell_hash["A3"].render} #{@cell_hash["A4"].render} \n" +
+        "B #{@cell_hash["B1"].render} #{@cell_hash["B2"].render} #{@cell_hash["B3"].render} #{@cell_hash["B4"].render} \n" +
+        "C #{@cell_hash["C1"].render} #{@cell_hash["C2"].render} #{@cell_hash["C3"].render} #{@cell_hash["C4"].render} \n" +
+        "D #{@cell_hash["D1"].render} #{@cell_hash["D2"].render} #{@cell_hash["D3"].render} #{@cell_hash["D4"].render} \n"
+    end
   end
-end
-  # => [".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."]
-
-  # def board_top_row
-  #   render_array.insert(0," ",1.to_s, 2.to_s, 3.to_s, 4.to_s).join(" ")
-  # end
-  # # =>  "  1 2 3 4 . . . . . . . . . . . . . . . ."
-  #
-  # def render
-  #   board.board_top_row = render_array.insert(0," ",1.to_s, 2.to_s, 3.to_s, 4.to_s).join(" ")
-  #    a = board_top_row.insert(10, "\n" + "A ")
-  #    # => "  1 2 3 4 \nA . . . . . . . . . . . . . . . ."
-  #    b = a.insert(20, " \n" + "B")
-  #    # => "  1 2 3 4 \nA . . . . \nB . . . . . . . . . . . ."
-  #    c = b.insert(31, " \n" + "C")
-  #    # => "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . . . . ."
-  #    d = c.insert(42, " \n" + "D")
-  #    # => "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . ."
-  #    bottom_row = d.insert(53, " \n")
-  #    # => "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
-  # end
-
 
   def cruiser_placement(ship_type)
     valid_combo_cruiser = []
