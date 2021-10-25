@@ -46,13 +46,13 @@ class Game
   #     cruiser_player_input = gets.chomp
   # end
 
-  def player_cruiser_coords_formatted
+  def player_coords_formatted
     #mocking the gets.chomp, will have to remove this variable later
-    cruiser_player_input = gets.chomp
+    player_input = gets.chomp
     # cruiser_player_input = "A4 B4 C4"
-    @player_cruiser_input = cruiser_player_input.split
+    @player_input = player_input.split
       #=> ["A1", "B1", "C1"]
-    @player_cruiser_input
+    @player_input
   end
 
 
