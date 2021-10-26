@@ -8,7 +8,9 @@ class Game
               :submarine_player,
               :board_comp,
               :cruiser_comp,
-              :submarine_comp
+              :submarine_comp,
+              :player_shot,
+              :computer_guess
 
   def initialize
     @board_comp = Board.new
