@@ -53,6 +53,9 @@ class Game
     puts "Enter the coordinate for your shot:"
     player_shoot
     computer_shot
+    player_results
+    comp_results
+
     require "pry"; binding.pry
     # until game_over?
 
@@ -107,6 +110,28 @@ class Game
     @computer_guess = computer_guess_array.pop
     @board_player.cell_hash[@computer_guess].fire_upon
   end
+
+  def player_results
+    if board_comp.cell_hash[@player_shot].render == "M"
+      puts "Your shot on #{@player_shot} was a miss."
+    elsif board_comp.cell_hash[@player_shot].render == "H"
+      puts "Your shot on #{@player_shot} was a hit."
+    else
+      puts "Your shot on #{@player_shot} sunk a ship!"
+    end
+  end
+
+  def comp_results
+    if board_comp.cell_hash[@computer_guess].render == "M"
+      puts "My shot on #{@computer_guess} was a miss."
+    elsif board_comp.cell_hash[@computer_guess].render == "H"
+      puts "My shot on #{@computer_guess} was a hit."
+    else
+      puts "My shot on #{@computer_guess} sunk a ship!"
+    end
+  end
+
+
 
   def game_over?
   end
