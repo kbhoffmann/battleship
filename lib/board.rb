@@ -157,12 +157,6 @@ class Board
   end
 
   def player_ship_placement(ship_type, coords)
-    if valid_placement?(ship_type, coords)
       place(ship_type, coords)
-    else
-      puts "Those are invalid coordinates. Please try again:"
-      ## Was not sure how to get this to repeat, need to look at this
-      return false
-    end
   end
 end
