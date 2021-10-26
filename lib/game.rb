@@ -56,7 +56,7 @@ class Game
     computer_shot
     player_results
     comp_results
-  
+
     # until game_over?
       #RUN GAME LOGIC
         #player/computer shots
@@ -137,12 +137,10 @@ class Game
 
   def player_lost?
     @cruiser_player.health == 0 && @submarine_player.health == 0
-    puts "I won!"
   end
 
   def comp_lost?
     @cruiser_comp.health == 0 && @submarine_comp.health == 0
-    puts "You won!"
   end
 
   def game_over?
