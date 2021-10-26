@@ -22,7 +22,7 @@ class Game
   end
 
   def welcome_message
-    puts "Welcome to BATTLESHIP"
+    puts "Welcome to BATTLESHIP!"
     puts "Enter p to play. Enter q to quit."
   end
 
@@ -33,8 +33,7 @@ class Game
       play_game
 
     elsif answer == "q"
-      p "Good Bye"
-      exit!
+      p "Good Bye!"
     else
       p "Invalid Response"
       self.starter
