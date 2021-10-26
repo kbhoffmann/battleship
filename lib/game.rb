@@ -8,7 +8,9 @@ class Game
               :submarine_player,
               :board_comp,
               :cruiser_comp,
-              :submarine_comp
+              :submarine_comp,
+              :player_shot,
+              :computer_guess
 
   def initialize
     @board_comp = Board.new
@@ -22,7 +24,7 @@ class Game
   end
 
   def welcome_message
-    puts "Welcome to BATTLESHIP"
+    puts "Welcome to BATTLESHIP!"
     puts "Enter p to play. Enter q to quit."
   end
 
@@ -33,8 +35,7 @@ class Game
       play_game
 
     elsif answer == "q"
-      p "Good Bye"
-      exit!
+      p "Good Bye!"
     else
       p "Invalid Response"
       self.starter
@@ -50,16 +51,20 @@ class Game
     puts "Enter the squares for the Submarine (2 spaces):"
     player_choice(@submarine_player)
     display_boards(board_comp.render, board_player.render(true))
-    puts "Enter the coordinate for your shot:"
+    puts "Enter the coordinates for your shot:"
     player_shoot
     computer_shot
     player_results
     comp_results
 
-    require "pry"; binding.pry
+
     # until game_over?
-
-
+      #RUN GAME LOGIC
+        #player/computer shots
+        #player/computer comp_results
+        #board visuals/renders
+      #game is over when either player or
+      #computer ships are both sunk
     # end
 
     end_game_message
@@ -75,7 +80,7 @@ class Game
   end
 
   def player_choice(ship_type)
-    player_input = gets.chomp
+    player_input = gets.chomp.upcase
     board_player.player_ship_placement(ship_type, player_input.split)
   end
 
@@ -122,16 +127,14 @@ class Game
   end
 
   def comp_results
-    if board_comp.cell_hash[@computer_guess].render == "M"
+    if board_player.cell_hash[@computer_guess].render == "M"
       puts "My shot on #{@computer_guess} was a miss."
-    elsif board_comp.cell_hash[@computer_guess].render == "H"
+    elsif board_player.cell_hash[@computer_guess].render == "H"
       puts "My shot on #{@computer_guess} was a hit."
     else
       puts "My shot on #{@computer_guess} sunk a ship!"
     end
   end
-
-
 
   def game_over?
   end

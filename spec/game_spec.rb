@@ -8,23 +8,46 @@ describe Game do
   it 'exists' do
     game = Game.new
 
-
     expect(game).to be_a Game
   end
 
-  # it 'starts with a player board' do
-  #   game = Game.new
-  #
-  #   expect(game.player_board).to be_an_instance_of(Board)
-  # end
+  it 'starts with a player board' do
+    game = Game.new
 
-  # it 'starts with a player ships' do
-  #   game = Game.new
-  #
-  #   expect(game.player_cruiser).to be_an_instance_of(Ship)
-  #   expect(game.player_sub).to be_an_instance_of(Ship)
-  # end
+    expect(game.board_player).to be_an_instance_of(Board)
+  end
 
+  it 'starts with a player ships' do
+    game = Game.new
+
+    expect(game.cruiser_player).to be_an_instance_of(Ship)
+    expect(game.submarine_player).to be_an_instance_of(Ship)
+  end
+
+  it 'starts with a computer board' do
+    game = Game.new
+
+    expect(game.board_comp).to be_an_instance_of(Board)
+  end
+
+  it 'starts with computer ships' do
+    game = Game.new
+
+    expect(game.cruiser_comp).to be_an_instance_of(Ship)
+    expect(game.submarine_comp).to be_an_instance_of(Ship)
+  end
+
+  it 'starts with no player or computer shots' do
+    game = Game.new
+
+    expect(game.player_shot).to be(nil)
+  end
+
+  it 'starts with no player or computer guesses' do
+    game = Game.new
+
+    expect(game.computer_guess).to be(nil)
+  end
   # it 'formats player input for cruiser' do
   #   game = Game.new
   #
@@ -43,7 +66,7 @@ describe Game do
   # end
 
 
-  it '#display_boards shows a computer board with no ships and player board' do
+  xit '#display_boards shows a computer board with no ships and player board' do
     game = Game.new
     board_comp = Board.new
     board_player = Board.new
@@ -75,7 +98,7 @@ describe Game do
     expect(game.display_boards(board_comp.render,board_player.render(true))).to eq(nil)
   end
 
-  it 'exists' do
+  xit '' do
     game = Game.new
 
     board_comp = Board.new
@@ -92,7 +115,7 @@ describe Game do
     player_sub = ["B1", "B2"]
     board_player.player_ship_placement(cruiser_player,player_cruiser)
     board_player.player_ship_placement(submarine_player,player_sub)
-    expect(game.player_shot).to eq ("M")
+    expect(game.player_shoot).to eq ("M")
   end
 
 end
