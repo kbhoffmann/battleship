@@ -79,7 +79,7 @@ class Game
   end
 
   def player_choice(ship_type)
-    player_input = gets.chomp
+    player_input = gets.chomp.upcase
     board_player.player_ship_placement(ship_type, player_input.split)
   end
 
