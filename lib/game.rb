@@ -51,7 +51,7 @@ class Game
     puts "Enter the squares for the Submarine (2 spaces):"
     player_choice(@submarine_player)
     display_boards(board_comp.render, board_player.render(true))
-    puts "Enter the coordinate for your shot:"
+    puts "Enter the coordinates for your shot:"
     player_shoot
     computer_shot
     player_results
@@ -127,16 +127,14 @@ class Game
   end
 
   def comp_results
-    if board_comp.cell_hash[@computer_guess].render == "M"
+    if board_player.cell_hash[@computer_guess].render == "M"
       puts "My shot on #{@computer_guess} was a miss."
-    elsif board_comp.cell_hash[@computer_guess].render == "H"
+    elsif board_player.cell_hash[@computer_guess].render == "H"
       puts "My shot on #{@computer_guess} was a hit."
     else
       puts "My shot on #{@computer_guess} sunk a ship!"
     end
   end
-
-
 
   def game_over?
   end
