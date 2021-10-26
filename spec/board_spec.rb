@@ -87,7 +87,7 @@ RSpec.describe Board do
     expect(board.unique_val_test?(array_4)).to eq(false)
   end
 
-  it 'Validates if a ship placement is true for ship length' do
+  it 'validates if a ship placement is true for ship length' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -96,15 +96,20 @@ RSpec.describe Board do
     expect(board.valid_placement?(submarine, ["A2","A3","A4"])).to eq(false)
   end
 
-  it 'Validates if a ship placement is true for consecutive coordinates' do
+  it 'validates if a ship placement is true for consecutive coordinates' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     board.cells
+
     expect(board.valid_placement?(cruiser, ["A1","A2","A4"])).to eq(false)
+    expect(board.valid_placement?(cruiser, ["A1","A2","A3"])).to eq(true)
+    expect(board.valid_placement?(cruiser, ["A3","A2","A1"])).to eq(true)
+    expect(board.valid_placement?(cruiser, ["D3","C3","B3"])).to eq(true)
+    expect(board.valid_placement?(submarine, ["A1","B1"])).to eq(true)
     expect(board.valid_placement?(submarine, ["A1","C1"])).to eq(false)
-    expect(board.valid_placement?(cruiser, ["A3","A2","A1"])).to eq(false)
-    expect(board.valid_placement?(submarine, ["C1","B1"])).to eq(false)
+    expect(board.valid_placement?(submarine, ["B3","B2"])).to eq(true)
+    expect(board.valid_placement?(submarine, ["C1","B1"])).to eq(true)
   end
 
   it 'validates that ship placement coordinates cannot be diagonal' do
@@ -225,34 +230,35 @@ RSpec.describe Board do
     expect(board.sub_loc.count).to eq (2)
   end
 
-  xit 'checks player input and places_ship' do
+  it 'checks player input and places_ship' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     board.cells
-    player_choice = ["A1","A2","A3"]
 
-    expect(board.player_ship_placement(cruiser, player_choice)).to be_a(Hash)
+    cruiser_coords_1 = ["A1","A2","A3"]
+    cruiser_coords_2 = ["D3","D2","D1"]
 
-    player_choice_2 = ["A1","B2","A3"]
-
-    expect(board.player_ship_placement(cruiser,player_choice_2)).to eq false
+    expect(board.player_ship_placement(cruiser, cruiser_coords_1)).to be_an(Array)
+    expect(board.player_ship_placement(cruiser, cruiser_coords_2)).to be_an(Array)
+    cruiser_coords_3 = ["A1","B2","A3"]
+    expect(board.player_ship_placement(cruiser, cruiser_coords_3)).to be(false)
   end
 
-
-  xit 'Able to place a ship, then place a second ship' do
+  it 'able to place a ship, then place a second ship' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     board.cells
-    player_choice = ["A1","A2","A3"]
-    board.player_ship_placement(cruiser, player_choice)
-    player_choice_2 = ["B2","B3"]
+    board.player_ship_placement(cruiser, ["A1","A2","A3"])
 
-    expect(board.player_ship_placement(submarine,player_choice_2)).to be_a(Hash)
+    sub_coords_1 = ["B2","B3"]
+    sub_coords_2 = ["C3","C2"]
 
-    player_choice_3 = ["B2","A3"]
-    expect(board.player_ship_placement(submarine,player_choice_3)).to eq false
+    expect(board.player_ship_placement(submarine, sub_coords_1)).to be_an(Array)
+    expect(board.player_ship_placement(submarine, sub_coords_2)).to be_an(Array)
+    sub_coords_3 = ["B2","A3"]
+    sub_coords_4 = ["A1","A2"]
+    expect(board.player_ship_placement(submarine, sub_coords_3)).to eq(false)
   end
-
 end
