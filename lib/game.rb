@@ -10,7 +10,8 @@ class Game
               :cruiser_comp,
               :submarine_comp,
               :player_shot,
-              :computer_guess
+              :computer_guess,
+              :shot_log
 
   def initialize
     @board_comp = Board.new
@@ -21,6 +22,7 @@ class Game
     @submarine_comp = Ship.new("Submarine", 2)
     @player_shot = nil
     @computer_guess = nil
+    @shot_log = board_comp.coordinates
   end
 
   def welcome_message
@@ -97,14 +99,19 @@ class Game
 
 
   def player_shoot
-    @player_shot = gets.chomp
-    @player_shot.upcase.split
-    if @board_comp.valid_coordinate?(@player_shot)
+    @player_shot = gets.chomp.upcase
+    @player_shot.split
+    if @board_comp.valid_coordinate?(@player_shot) && @shot_log.include?(@player_shot)
       @board_comp.cell_hash[@player_shot].fire_upon
+      log_player_shots(@player_shot)
     else
       puts "Please enter a valid coordinate:"
       self.player_shoot
     end
+  end
+
+  def log_player_shots(shot)
+    @shot_log.delete(shot)
   end
 
   def computer_shot
@@ -132,6 +139,8 @@ class Game
       puts "My shot on #{@computer_guess} sunk a ship!"
     end
   end
+
+
 
   def player_lost?
     @cruiser_player.health == 0 && @submarine_player.health == 0
