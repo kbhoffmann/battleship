@@ -71,7 +71,7 @@ class Board
       if @cell_hash[coordinate] == !nil
          if @cell_hash[coordinate].occupied.count == 1
           checker << coordinate
-         end 
+         end
       end
     end
     checker.length == 0
@@ -169,7 +169,4 @@ class Board
     place(ship_type, @sub_loc)
   end
 
-  def player_ship_placement(ship_type, coords)
-      place(ship_type, coords)
-  end
 end
