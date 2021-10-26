@@ -51,8 +51,8 @@ describe Game do
 
   it 'shows that the player lost' do
     game = Game.new
-    game.board_player.player_ship_placement(game.cruiser_player,["A1", "A2","A3"])
-    game.board_player.player_ship_placement(game.submarine_player,["B1", "B2"])
+    game.board_player.place(game.cruiser_player,["A1", "A2","A3"])
+    game.board_player.place(game.submarine_player,["B1", "B2"])
     game.board_player.cell_hash["A1"].fire_upon
     game.board_player.cell_hash["A2"].fire_upon
     game.board_player.cell_hash["A3"].fire_upon
@@ -64,8 +64,8 @@ describe Game do
 
   it 'shows that the play has not lost' do
     game = Game.new
-    game.board_player.player_ship_placement(game.cruiser_player,["A1", "A2","A3"])
-    game.board_player.player_ship_placement(game.submarine_player,["B1", "B2"])
+    game.board_player.place(game.cruiser_player,["A1", "A2","A3"])
+    game.board_player.place(game.submarine_player,["B1", "B2"])
     game.board_player.cell_hash["A1"].fire_upon
     game.board_player.cell_hash["A2"].fire_upon
     game.board_player.cell_hash["A3"].fire_upon
@@ -76,8 +76,8 @@ describe Game do
 
   it 'shows that the computer lost' do
     game = Game.new
-    game.board_comp.player_ship_placement(game.cruiser_comp,["A1", "A2","A3"])
-    game.board_comp.player_ship_placement(game.submarine_comp,["B1", "B2"])
+    game.board_comp.place(game.cruiser_comp,["A1", "A2","A3"])
+    game.board_comp.place(game.submarine_comp,["B1", "B2"])
     game.board_comp.cell_hash["A1"].fire_upon
     game.board_comp.cell_hash["A2"].fire_upon
     game.board_comp.cell_hash["A3"].fire_upon
@@ -89,8 +89,8 @@ describe Game do
 
   it 'shows that the computer has not lost' do
     game = Game.new
-    game.board_comp.player_ship_placement(game.cruiser_comp,["A1", "A2","A3"])
-    game.board_comp.player_ship_placement(game.submarine_comp,["B1", "B2"])
+    game.board_comp.place(game.cruiser_comp,["A1", "A2","A3"])
+    game.board_comp.place(game.submarine_comp,["B1", "B2"])
     game.board_comp.cell_hash["A1"].fire_upon
     game.board_comp.cell_hash["A2"].fire_upon
     game.board_comp.cell_hash["A3"].fire_upon
@@ -98,6 +98,13 @@ describe Game do
 
     expect(game.comp_lost?).to eq (false)
   end
+
+  it '#removes shots from valid shots' do
+    game = Game.new
+    game.log_player_shots("B1")
+    expect(game.shot_log.include?("B1")).to eq (false)
+  end
+
   # it 'formats player input for cruiser' do
   #   game = Game.new
   #
