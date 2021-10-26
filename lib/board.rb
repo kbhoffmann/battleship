@@ -65,16 +65,19 @@ class Board
     @cell_hash[coordinate]
   end
 
-  def not_occupied?(coordinates)
-    checker = []
-    coordinates.each do |coordinate|
-      if @cell_hash[coordinate] == !nil
-         if @cell_hash[coordinate].occupied.count == 1
-          checker << coordinate
-         end
-      end
+  def occupied?(coord)
+    if valid_coordinate?(coord)
+      @cell_hash[coord].occupied.count == 1
     end
-    checker.length == 0
+  end
+
+  def cells_empty(coords)
+    truth_checker = []
+    coords.each do |coord|
+      truth_checker << occupied?(coord)
+    end
+    truth_checker
+    unique_val_test?(truth_checker) && truth_checker.first == false
   end
 
   def unique_val_test?(coord)
@@ -107,7 +110,7 @@ class Board
 
     basic_conditions = ship_type.length == coord.length
 
-    if basic_conditions && not_occupied?(coord) && valid_coordinate
+    if basic_conditions && cells_empty(coord) #&& valid_coordinate
       if (number_range.include?(numbers_separate) || number_range.include?(numbers_separate_reversed)) && letters_unique
         return true
       elsif (letter_range.include?(letters_separate) || letter_range.include?(letters_separate_reversed)) && numbers_unique
