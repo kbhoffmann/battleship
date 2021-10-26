@@ -48,6 +48,56 @@ describe Game do
 
     expect(game.computer_guess).to be(nil)
   end
+
+  it 'shows that the player lost' do
+    game = Game.new
+    game.board_player.player_ship_placement(game.cruiser_player,["A1", "A2","A3"])
+    game.board_player.player_ship_placement(game.submarine_player,["B1", "B2"])
+    game.board_player.cell_hash["A1"].fire_upon
+    game.board_player.cell_hash["A2"].fire_upon
+    game.board_player.cell_hash["A3"].fire_upon
+    game.board_player.cell_hash["B1"].fire_upon
+    game.board_player.cell_hash["B2"].fire_upon
+
+    expect(game.player_lost?).to eq (true)
+  end
+
+  it 'shows that the play has not lost' do
+    game = Game.new
+    game.board_player.player_ship_placement(game.cruiser_player,["A1", "A2","A3"])
+    game.board_player.player_ship_placement(game.submarine_player,["B1", "B2"])
+    game.board_player.cell_hash["A1"].fire_upon
+    game.board_player.cell_hash["A2"].fire_upon
+    game.board_player.cell_hash["A3"].fire_upon
+    game.board_player.cell_hash["B1"].fire_upon
+
+    expect(game.player_lost?).to eq (false)
+  end
+
+  it 'shows that the computer lost' do
+    game = Game.new
+    game.board_comp.player_ship_placement(game.cruiser_comp,["A1", "A2","A3"])
+    game.board_comp.player_ship_placement(game.submarine_comp,["B1", "B2"])
+    game.board_comp.cell_hash["A1"].fire_upon
+    game.board_comp.cell_hash["A2"].fire_upon
+    game.board_comp.cell_hash["A3"].fire_upon
+    game.board_comp.cell_hash["B1"].fire_upon
+    game.board_comp.cell_hash["B2"].fire_upon
+
+    expect(game.comp_lost?).to eq (true)
+  end
+
+  it 'shows that the computer has not lost' do
+    game = Game.new
+    game.board_comp.player_ship_placement(game.cruiser_comp,["A1", "A2","A3"])
+    game.board_comp.player_ship_placement(game.submarine_comp,["B1", "B2"])
+    game.board_comp.cell_hash["A1"].fire_upon
+    game.board_comp.cell_hash["A2"].fire_upon
+    game.board_comp.cell_hash["A3"].fire_upon
+    game.board_comp.cell_hash["B1"].fire_upon
+
+    expect(game.comp_lost?).to eq (false)
+  end
   # it 'formats player input for cruiser' do
   #   game = Game.new
   #
@@ -97,28 +147,8 @@ describe Game do
                  D . . . ."
     expect(game.display_boards(board_comp.render,board_player.render(true))).to eq(nil)
   end
-
-  xit '' do
-    game = Game.new
-
-    board_comp = Board.new
-    board_player = Board.new
-    cruiser_comp = Ship.new("Cruiser", 3)
-    cruiser_player = Ship.new("Cruiser", 3)
-    submarine_comp = Ship.new("Submarine", 2)
-    submarine_player = Ship.new("Submarine", 2)
-    board_comp.cells
-    board_player.cells
-    board_comp.cruiser_placement(cruiser_comp)
-    board_comp.sub_placement(submarine_comp)
-    player_cruiser = ["A1", "A2", "A3"]
-    player_sub = ["B1", "B2"]
-    board_player.player_ship_placement(cruiser_player,player_cruiser)
-    board_player.player_ship_placement(submarine_player,player_sub)
-    expect(game.player_shoot).to eq ("M")
-  end
-
 end
+
 
 #   xit 'can let the player place a cruiser ship' do
 #     game = Game.new
