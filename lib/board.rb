@@ -1,6 +1,7 @@
 require './lib/ship'
 require './lib/cell'
 require './lib/game'
+require 'pry'
 
 class Board
   attr_reader :cell_hash,
@@ -67,8 +68,10 @@ class Board
   def not_occupied?(coordinates)
     checker = []
     coordinates.each do |coordinate|
-      if @cell_hash[coordinate].occupied.count == 1
-        checker << coordinate
+      if @cell_hash[coordinate] == !nil
+         if @cell_hash[coordinate].occupied.count == 1
+          checker << coordinate
+         end 
       end
     end
     checker.length == 0
@@ -78,11 +81,21 @@ class Board
     coord.tally(&:uniq).count == 1
   end
 
+  def check_all_coords_valid(coords_array)
+    truth_container = []
+    coords_array.each do |coord|
+      truth_container << valid_coordinate?(coord)
+    end
+    truth_container
+    unique_val_test?(truth_container) && truth_container.first == true
+  end
+
   def valid_placement?(ship_type, ship_coords_array)
     coord = ship_coords_array
     numbers_separate = numbers_separate(coord)
     numbers_separate_reversed = numbers_separate(coord).reverse
 
+    valid_coordinate = check_all_coords_valid(coord)
     letters_separate = letters_separate(coord)
     letters_separate_reversed = letters_separate(coord).reverse
 
@@ -94,7 +107,7 @@ class Board
 
     basic_conditions = ship_type.length == coord.length
 
-    if basic_conditions && not_occupied?(coord)
+    if basic_conditions && not_occupied?(coord) && valid_coordinate
       if (number_range.include?(numbers_separate) || number_range.include?(numbers_separate_reversed)) && letters_unique
         return true
       elsif (letter_range.include?(letters_separate) || letter_range.include?(letters_separate_reversed)) && numbers_unique
