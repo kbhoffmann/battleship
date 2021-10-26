@@ -17,11 +17,18 @@ RSpec.describe Board do
     expect(board.coordinates.length).to eq(16)
   end
 
-  it 'keeps a dictionary of cells' do
+  it 'creates a dictionary of cells' do
     board = Board.new
 
     expect(board.cells.length).to eq(16)
     expect(board.cells).to be_a(Hash)
+  end
+
+  it 'starts with no computer ships on board' do
+    board = Board.new
+
+    expect(board.cruiser_loc.length).to eq(0)
+    expect(board.sub_loc.length).to eq(0)
   end
 
   it 'can check if coordinate is valid' do
@@ -71,8 +78,18 @@ RSpec.describe Board do
     cruiser = Ship.new("Cruiser", 3)
     board.cells
     board.place(cruiser, ["A1", "A2", "A3"])
-    expect(board.not_occupied?(["A1","A2"])).to eq(false)
-    expect(board.not_occupied?(["B1","B2"])).to eq(true)
+    expect(board.occupied?("A1")).to eq(true)
+    expect(board.occupied?("B1")).to eq(false)
+  end
+
+  it "text" do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.cells
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    expect(board.cells_empty(["A1", "B1", "C1"])).to eq(false)
+    expect(board.cells_empty(["D1", "D2", "D3"])).to eq(true)
   end
 
   it "#unique_val_test? returns true if all values in array are the same" do
