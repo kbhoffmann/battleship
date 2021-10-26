@@ -45,6 +45,7 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+
     expect(board.number_range(cruiser).count).to eq(2)
     expect(board.number_range(cruiser)).to be_a(Array)
   end
@@ -53,6 +54,7 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+
     expect(board.letter_range(cruiser).count).to eq(2)
     expect(board.letter_range(cruiser)).to be_a(Array)
   end
@@ -61,6 +63,7 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+
     expect(board.numbers_separate(["1","2","3"]).count).to eq(3)
     expect(board.numbers_separate(["1","2","3"])).to be_a(Array)
   end
@@ -69,6 +72,7 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+
     expect(board.letters_separate(["A2","A3","A4"]).count).to eq(3)
     expect(board.letters_separate(["A2","A3","A4"])).to be_a(Array)
   end
@@ -78,11 +82,12 @@ RSpec.describe Board do
     cruiser = Ship.new("Cruiser", 3)
     board.cells
     board.place(cruiser, ["A1", "A2", "A3"])
+
     expect(board.occupied?("A1")).to eq(true)
     expect(board.occupied?("B1")).to eq(false)
   end
 
-  it "text" do
+  it "can tell if the cells on the board are empty" do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     board.cells
@@ -149,14 +154,15 @@ RSpec.describe Board do
     expect(board.valid_placement?(cruiser, ["B1", "C1", "D1"])).to eq(true)
   end
 
-  it 'can place ships in its cells ' do
+  it 'can place computer ships in its cells ' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
-    board.cells
-    board.place(cruiser, ["A1", "A2", "A3"])
     cell_1 = board.cells["A1"]
     cell_2 = board.cells["A2"]
     cell_3 = board.cells["A3"]
+    board.cells
+
+    board.place(cruiser, ["A1", "A2", "A3"])
 
     cell_1.ship
     cell_2.ship
@@ -196,6 +202,7 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     board.cells
+
     board.place(cruiser, ["A1", "A2", "A3"])
 
     expected_1 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
@@ -222,6 +229,7 @@ RSpec.describe Board do
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     board.cells
+
     board.place(cruiser, ["A1", "A2", "A3"])
     board.place(submarine, ["C4", "D4"] )
 
@@ -242,6 +250,7 @@ RSpec.describe Board do
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     board.cells
+
     board.cruiser_placement(cruiser)
     expect(board.cruiser_loc.count).to eq (3)
   end
@@ -251,6 +260,7 @@ RSpec.describe Board do
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     board.cells
+
     board.cruiser_placement(cruiser)
     board.sub_placement(submarine)
     expect(board.sub_loc.count).to eq (2)
