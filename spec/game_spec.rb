@@ -58,7 +58,20 @@ describe Game do
     game.board_player.cell_hash["A3"].fire_upon
     game.board_player.cell_hash["B1"].fire_upon
     game.board_player.cell_hash["B2"].fire_upon
+
     expect(game.player_lost?).to eq (true)
+  end
+
+  it 'shows that the play has not lost' do
+    game = Game.new
+    game.board_player.player_ship_placement(game.cruiser_player,["A1", "A2","A3"])
+    game.board_player.player_ship_placement(game.submarine_player,["B1", "B2"])
+    game.board_player.cell_hash["A1"].fire_upon
+    game.board_player.cell_hash["A2"].fire_upon
+    game.board_player.cell_hash["A3"].fire_upon
+    game.board_player.cell_hash["B1"].fire_upon
+
+    expect(game.player_lost?).to eq (false)
   end
 
   it 'shows that the computer lost' do
@@ -70,7 +83,20 @@ describe Game do
     game.board_comp.cell_hash["A3"].fire_upon
     game.board_comp.cell_hash["B1"].fire_upon
     game.board_comp.cell_hash["B2"].fire_upon
+
     expect(game.comp_lost?).to eq (true)
+  end
+
+  it 'shows that the computer has not lost' do
+    game = Game.new
+    game.board_comp.player_ship_placement(game.cruiser_comp,["A1", "A2","A3"])
+    game.board_comp.player_ship_placement(game.submarine_comp,["B1", "B2"])
+    game.board_comp.cell_hash["A1"].fire_upon
+    game.board_comp.cell_hash["A2"].fire_upon
+    game.board_comp.cell_hash["A3"].fire_upon
+    game.board_comp.cell_hash["B1"].fire_upon
+
+    expect(game.comp_lost?).to eq (false)
   end
   # it 'formats player input for cruiser' do
   #   game = Game.new
