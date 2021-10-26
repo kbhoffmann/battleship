@@ -22,7 +22,7 @@ class Game
     @submarine_comp = Ship.new("Submarine", 2)
     @player_shot = nil
     @computer_guess = nil
-    @shot_log = board_comp.coordinates
+    @shot_log = @board_comp.coordinates
   end
 
   def welcome_message
