@@ -56,7 +56,7 @@ class Game
     computer_shot
     player_results
     comp_results
-
+    require "pry"; binding.pry
 
     # until game_over?
       #RUN GAME LOGIC
@@ -134,6 +134,14 @@ class Game
     else
       puts "My shot on #{@computer_guess} sunk a ship!"
     end
+  end
+
+  def player_lost?
+    @cruiser_player.health == 0 && @submarine_player.health == 0
+  end
+
+  def comp_lost?
+    @cruiser_comp.health == 0 && @submarine_comp.health == 0
   end
 
   def game_over?
