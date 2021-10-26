@@ -107,22 +107,8 @@ class Board
   def place(ship_type, coords)
     coords.each do |coordinate|
       @cell_hash[coordinate].place_ship(ship_type)
-    end    # cell_hash
+    end
   end
-
-  # def render_array(contain_ship = false)
-  #   if contain_ship == true
-  #   x = @cell_hash.map do |coordinate, cell_object|
-  #         cell_object.render(!not_occupied?([coordinate]))
-  #     end
-  #
-  #   else
-  #   y =  @cell_hash.map do |coordinate, cell_object|
-  #       cell_object.render(contain_ship)
-  #     end
-  #   end
-
-
 
   def render(contain_ship = false)
     if contain_ship == true
