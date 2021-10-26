@@ -56,10 +56,14 @@ class Game
     player_results
     comp_results
 
-    require "pry"; binding.pry
+
     # until game_over?
-
-
+      #RUN GAME LOGIC
+        #player/computer shots
+        #player/computer comp_results
+        #board visuals/renders
+      #game is over when either player or
+      #computer ships are both sunk
     # end
 
     end_game_message
