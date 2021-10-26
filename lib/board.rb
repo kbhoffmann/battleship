@@ -61,9 +61,9 @@ class Board
     end
   end
 
-  def filled_coordinate(coordinate)
-    @cell_hash[coordinate]
-  end
+  # def filled_coordinate(coordinate)
+  #   @cell_hash[coordinate]
+  # end
 
   def occupied?(coord)
     if valid_coordinate?(coord)
