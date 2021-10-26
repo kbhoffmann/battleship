@@ -71,8 +71,13 @@ class Game
   end
 
   def player_choice(ship_type)
-    player_input = gets.chomp.upcase
-    board_player.player_ship_placement(ship_type, player_input.split)
+    player_input = gets.chomp.upcase.split
+    if board_player.valid_placement?(ship_type, player_input)
+      board_player.place(ship_type, player_input)
+    else
+      puts "Those are invalid coordinates. Please try again:"
+      self.player_choice(ship_type)
+    end
   end
 
   def display_boards(computer_board, player_board)
@@ -89,6 +94,7 @@ class Game
       p "I won!"
     end
   end
+
 
   def player_shoot
     @player_shot = gets.chomp
