@@ -50,23 +50,15 @@ class Game
     puts board_player.render(true)
     puts "Enter the squares for the Submarine (2 spaces):"
     player_choice(@submarine_player)
-    display_boards(board_comp.render, board_player.render(true))
-    puts "Enter the coordinates for your shot:"
-    player_shoot
-    computer_shot
-    player_results
-    comp_results
-
-    # until game_over?
-      #RUN GAME LOGIC
-        #player/computer shots
-        #player/computer comp_results
-        #board visuals/renders
-      #game is over when either player or
-      #computer ships are both sunk
-    # end
-
-    # end_game_message
+    until game_over?
+      display_boards(board_comp.render, board_player.render(true))
+      puts "Enter the coordinates for your shot:"
+      player_shoot
+      computer_shot
+      player_results
+      comp_results
+    end
+    end_game_message
     self.starter
   end
 
@@ -91,7 +83,7 @@ class Game
   end
 
   def end_game_message
-    if #player wins
+    if comp_lost?
       p "You won!"
     else
       p "I won!"
