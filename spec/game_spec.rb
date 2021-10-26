@@ -24,6 +24,19 @@ describe Game do
     expect(game.submarine_player).to be_an_instance_of(Ship)
   end
 
+  it 'starts with a computer board' do
+    game = Game.new
+
+    expect(game.board_comp).to be_an_instance_of(Board)
+  end
+
+  it 'starts with computer ships' do
+    game = Game.new
+    
+    expect(game.cruiser_comp).to be_an_instance_of(Ship)
+    expect(game.submarine_comp).to be_an_instance_of(Ship)
+  end
+
   # it 'formats player input for cruiser' do
   #   game = Game.new
   #
