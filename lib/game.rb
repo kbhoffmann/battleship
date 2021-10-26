@@ -17,6 +17,8 @@ class Game
     @submarine_player = Ship.new("Submarine", 2)
     @cruiser_comp = Ship.new("Cruiser", 3)
     @submarine_comp = Ship.new("Submarine", 2)
+    @player_shot = nil
+    @computer_guess = nil
   end
 
   def welcome_message
@@ -42,17 +44,21 @@ class Game
   def play_game
     @board_comp.cruiser_placement(@cruiser_comp)
     @board_comp.sub_placement(@submarine_comp)
-    require "pry"; binding.pry
     player_place_text
     player_choice(@cruiser_player)
     puts board_player.render(true)
     puts "Enter the squares for the Submarine (2 spaces):"
     player_choice(@submarine_player)
     display_boards(board_comp.render, board_player.render(true))
-    until game_over?
-      # Game logic
+    puts "Enter the coordinate for your shot:"
+    player_shoot
+    computer_shot
+    require "pry"; binding.pry
+    # until game_over?
 
-    end
+
+    # end
+
     end_game_message
     self.starter
   end
@@ -65,7 +71,7 @@ class Game
     puts "Enter the squares for the Cruiser (3 spaces):"
   end
 
-  def play_choice(ship_type)
+  def player_choice(ship_type)
     player_input = gets.chomp
     board_player.player_ship_placement(ship_type, player_input.split)
   end
@@ -85,6 +91,22 @@ class Game
     end
   end
 
+  def player_shoot
+    @player_shot = gets.chomp
+    @player_shot.upcase.split
+    if @board_comp.valid_coordinate?(@player_shot)
+      @board_comp.cell_hash[@player_shot].fire_upon
+    else
+      puts "Please enter a valid coordinate:"
+      self.player_shoot
+    end
+  end
+
+  def computer_shot
+    computer_guess_array =  board_player.coordinates.shuffle!
+    @computer_guess = computer_guess_array.pop
+    @board_player.cell_hash[@computer_guess].fire_upon
+  end
 
   def game_over?
   end
