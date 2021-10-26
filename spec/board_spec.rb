@@ -10,7 +10,12 @@ RSpec.describe Board do
     expect(board).to be_an_instance_of(Board)
   end
 
-  #Should we test for @coordinates
+  it 'starts with a list of all cell coordinates' do
+    board = Board.new
+
+    expect(board.coordinates).to be_an(Array)
+    expect(board.coordinates.length).to eq(16)
+  end
 
   it 'keeps a dictionary of cells' do
     board = Board.new
@@ -220,7 +225,7 @@ RSpec.describe Board do
     expect(board.sub_loc.count).to eq (2)
   end
 
-  it 'checks player input and places_ship' do
+  xit 'checks player input and places_ship' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -235,7 +240,7 @@ RSpec.describe Board do
   end
 
 
-  it 'Able to place a ship, then place a second ship' do
+  xit 'Able to place a ship, then place a second ship' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
