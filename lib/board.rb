@@ -1,6 +1,7 @@
 require './lib/ship'
 require './lib/cell'
 require './lib/game'
+require 'pry'
 
 class Board
   attr_reader :cell_hash,
@@ -60,22 +61,36 @@ class Board
     end
   end
 
-  def filled_coordinate(coordinate)
-    @cell_hash[coordinate]
+  # def filled_coordinate(coordinate)
+  #   @cell_hash[coordinate]
+  # end
+
+  def occupied?(coord)
+    if valid_coordinate?(coord)
+      @cell_hash[coord].occupied.count == 1
+    end
   end
 
-  def not_occupied?(coordinates)
-    checker = []
-    coordinates.each do |coordinate|
-      if @cell_hash[coordinate].occupied.count == 1
-        checker << coordinate
-      end
+  def cells_empty(coords)
+    truth_checker = []
+    coords.each do |coord|
+      truth_checker << occupied?(coord)
     end
-    checker.length == 0
+    truth_checker
+    unique_val_test?(truth_checker) && truth_checker.first == false
   end
 
   def unique_val_test?(coord)
     coord.tally(&:uniq).count == 1
+  end
+
+  def check_all_coords_valid(coords_array)
+    truth_container = []
+    coords_array.each do |coord|
+      truth_container << valid_coordinate?(coord)
+    end
+    truth_container
+    unique_val_test?(truth_container) && truth_container.first == true
   end
 
   def valid_placement?(ship_type, ship_coords_array)
@@ -83,6 +98,7 @@ class Board
     numbers_separate = numbers_separate(coord)
     numbers_separate_reversed = numbers_separate(coord).reverse
 
+    valid_coordinate = check_all_coords_valid(coord)
     letters_separate = letters_separate(coord)
     letters_separate_reversed = letters_separate(coord).reverse
 
@@ -94,7 +110,7 @@ class Board
 
     basic_conditions = ship_type.length == coord.length
 
-    if basic_conditions && not_occupied?(coord)
+    if basic_conditions && cells_empty(coord) #&& valid_coordinate
       if (number_range.include?(numbers_separate) || number_range.include?(numbers_separate_reversed)) && letters_unique
         return true
       elsif (letter_range.include?(letters_separate) || letter_range.include?(letters_separate_reversed)) && numbers_unique
@@ -156,13 +172,4 @@ class Board
     place(ship_type, @sub_loc)
   end
 
-  def player_ship_placement(ship_type, coords)
-    if valid_placement?(ship_type, coords)
-      place(ship_type, coords)
-    else
-      puts "Those are invalid coordinates. Please try again:"
-      ## Was not sure how to get this to repeat, need to look at this
-      return false
-    end
-  end
 end

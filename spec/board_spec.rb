@@ -17,11 +17,18 @@ RSpec.describe Board do
     expect(board.coordinates.length).to eq(16)
   end
 
-  it 'keeps a dictionary of cells' do
+  it 'creates a dictionary of cells' do
     board = Board.new
 
     expect(board.cells.length).to eq(16)
     expect(board.cells).to be_a(Hash)
+  end
+
+  it 'starts with no computer ships on board' do
+    board = Board.new
+
+    expect(board.cruiser_loc.length).to eq(0)
+    expect(board.sub_loc.length).to eq(0)
   end
 
   it 'can check if coordinate is valid' do
@@ -38,6 +45,7 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+
     expect(board.number_range(cruiser).count).to eq(2)
     expect(board.number_range(cruiser)).to be_a(Array)
   end
@@ -46,6 +54,7 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+
     expect(board.letter_range(cruiser).count).to eq(2)
     expect(board.letter_range(cruiser)).to be_a(Array)
   end
@@ -54,6 +63,7 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+
     expect(board.numbers_separate(["1","2","3"]).count).to eq(3)
     expect(board.numbers_separate(["1","2","3"])).to be_a(Array)
   end
@@ -62,6 +72,7 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+
     expect(board.letters_separate(["A2","A3","A4"]).count).to eq(3)
     expect(board.letters_separate(["A2","A3","A4"])).to be_a(Array)
   end
@@ -71,8 +82,19 @@ RSpec.describe Board do
     cruiser = Ship.new("Cruiser", 3)
     board.cells
     board.place(cruiser, ["A1", "A2", "A3"])
-    expect(board.not_occupied?(["A1","A2"])).to eq(false)
-    expect(board.not_occupied?(["B1","B2"])).to eq(true)
+
+    expect(board.occupied?("A1")).to eq(true)
+    expect(board.occupied?("B1")).to eq(false)
+  end
+
+  it "can tell if the cells on the board are empty" do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.cells
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    expect(board.cells_empty(["A1", "B1", "C1"])).to eq(false)
+    expect(board.cells_empty(["D1", "D2", "D3"])).to eq(true)
   end
 
   it "#unique_val_test? returns true if all values in array are the same" do
@@ -85,6 +107,15 @@ RSpec.describe Board do
     expect(board.unique_val_test?(array_2)).to eq(false)
     expect(board.unique_val_test?(array_3)).to eq(true)
     expect(board.unique_val_test?(array_4)).to eq(false)
+  end
+
+  it 'checks if all coords valid' do
+    board = Board.new
+    ship_array_cords_1 = ["A1", "A2", "A3"]
+    ship_array_cords_2 = ["A1", "A2", "A6"]
+
+    expect(board.check_all_coords_valid(ship_array_cords_1)).to eq(true)
+    expect(board.check_all_coords_valid(ship_array_cords_2)).to eq(false)
   end
 
   it 'validates if a ship placement is true for ship length' do
@@ -123,14 +154,15 @@ RSpec.describe Board do
     expect(board.valid_placement?(cruiser, ["B1", "C1", "D1"])).to eq(true)
   end
 
-  it 'can place ships in its cells ' do
+  it 'can place computer ships in its cells ' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
-    board.cells
-    board.place(cruiser, ["A1", "A2", "A3"])
     cell_1 = board.cells["A1"]
     cell_2 = board.cells["A2"]
     cell_3 = board.cells["A3"]
+    board.cells
+
+    board.place(cruiser, ["A1", "A2", "A3"])
 
     cell_1.ship
     cell_2.ship
@@ -170,6 +202,7 @@ RSpec.describe Board do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     board.cells
+
     board.place(cruiser, ["A1", "A2", "A3"])
 
     expected_1 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
@@ -196,6 +229,7 @@ RSpec.describe Board do
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     board.cells
+
     board.place(cruiser, ["A1", "A2", "A3"])
     board.place(submarine, ["C4", "D4"] )
 
@@ -216,6 +250,7 @@ RSpec.describe Board do
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     board.cells
+
     board.cruiser_placement(cruiser)
     expect(board.cruiser_loc.count).to eq (3)
   end
@@ -225,40 +260,9 @@ RSpec.describe Board do
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     board.cells
+
     board.cruiser_placement(cruiser)
     board.sub_placement(submarine)
     expect(board.sub_loc.count).to eq (2)
-  end
-
-  it 'checks player input and places_ship' do
-    board = Board.new
-    cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2)
-    board.cells
-
-    cruiser_coords_1 = ["A1","A2","A3"]
-    cruiser_coords_2 = ["D3","D2","D1"]
-
-    expect(board.player_ship_placement(cruiser, cruiser_coords_1)).to be_an(Array)
-    expect(board.player_ship_placement(cruiser, cruiser_coords_2)).to be_an(Array)
-    cruiser_coords_3 = ["A1","B2","A3"]
-    expect(board.player_ship_placement(cruiser, cruiser_coords_3)).to be(false)
-  end
-
-  it 'able to place a ship, then place a second ship' do
-    board = Board.new
-    cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2)
-    board.cells
-    board.player_ship_placement(cruiser, ["A1","A2","A3"])
-
-    sub_coords_1 = ["B2","B3"]
-    sub_coords_2 = ["C3","C2"]
-
-    expect(board.player_ship_placement(submarine, sub_coords_1)).to be_an(Array)
-    expect(board.player_ship_placement(submarine, sub_coords_2)).to be_an(Array)
-    sub_coords_3 = ["B2","A3"]
-    sub_coords_4 = ["A1","A2"]
-    expect(board.player_ship_placement(submarine, sub_coords_3)).to eq(false)
   end
 end
