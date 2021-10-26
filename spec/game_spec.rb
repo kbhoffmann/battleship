@@ -32,11 +32,22 @@ describe Game do
 
   it 'starts with computer ships' do
     game = Game.new
-    
+
     expect(game.cruiser_comp).to be_an_instance_of(Ship)
     expect(game.submarine_comp).to be_an_instance_of(Ship)
   end
 
+  it 'starts with no player or computer shots' do
+    game = Game.new
+
+    expect(game.player_shot).to be(nil)
+  end
+
+  it 'starts with no player or computer guesses' do
+    game = Game.new
+
+    expect(game.computer_guess).to be(nil)
+  end
   # it 'formats player input for cruiser' do
   #   game = Game.new
   #
