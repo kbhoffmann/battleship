@@ -91,9 +91,27 @@ class Game
 
   def end_game_message
     if comp_lost?
-      p "You won!"
+      puts "****************" "You Won!" "****************"
+      puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+      puts "****************************************"
+      puts "=============COMPUTER BOARD============="
+      puts board_comp.render(true)
+      puts "==============PLAYER BOARD=============="
+      puts board_player.render(true)
+      puts "****************************************"
+      puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+      puts "****************************************"
+      puts "                                        "
     else
-      p "I won!"
+      puts "*****************" "I Won!" "*****************"
+      puts "****************************************"
+      puts "=============COMPUTER BOARD============="
+      puts board_comp.render(true)
+      puts "==============PLAYER BOARD=============="
+      puts board_player.render(true)
+      puts "****************************************"
+      puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+      puts "****************************************"
     end
   end
 
