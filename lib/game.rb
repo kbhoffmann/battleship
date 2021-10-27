@@ -35,7 +35,6 @@ class Game
     answer = gets.chomp.downcase
     if answer == "p"
       play_game
-
     elsif answer == "q"
       p "Good Bye!"
     else
@@ -112,9 +111,9 @@ class Game
       puts "****************************************"
       puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
       puts "****************************************"
+      puts "                                        "
     end
   end
-
 
   def player_shoot
     @player_shot = gets.chomp.upcase
@@ -140,10 +139,13 @@ class Game
 
   def player_results
     if board_comp.cell_hash[@player_shot].render == "M"
+      puts "****************************************"
       puts "Your shot on #{@player_shot} was a miss."
     elsif board_comp.cell_hash[@player_shot].render == "H"
+      puts "****************************************"
       puts "Your shot on #{@player_shot} was a hit."
     else
+      puts "****************************************"
       puts "Your shot on #{@player_shot} sunk a ship!"
     end
   end
@@ -157,8 +159,6 @@ class Game
       puts "My shot on #{@computer_guess} sunk a ship!"
     end
   end
-
-
 
   def player_lost?
     @cruiser_player.health == 0 && @submarine_player.health == 0
