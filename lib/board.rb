@@ -61,10 +61,6 @@ class Board
     end
   end
 
-  # def filled_coordinate(coordinate)
-  #   @cell_hash[coordinate]
-  # end
-
   def occupied?(coord)
     if valid_coordinate?(coord)
       @cell_hash[coord].occupied.count == 1
@@ -110,7 +106,7 @@ class Board
 
     basic_conditions = ship_type.length == coord.length
 
-    if basic_conditions && cells_empty(coord) #&& valid_coordinate
+    if basic_conditions && cells_empty(coord)
       if (number_range.include?(numbers_separate) || number_range.include?(numbers_separate_reversed)) && letters_unique
         return true
       elsif (letter_range.include?(letters_separate) || letter_range.include?(letters_separate_reversed)) && numbers_unique
