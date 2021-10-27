@@ -105,6 +105,17 @@ describe Game do
     expect(game.shot_log.include?("B1")).to eq (false)
   end
 
+  it '#game_reset, resets all instance variables' do
+    game = Game.new
+    game.log_player_shots("B1")
+
+    expect(game.shot_log.include?("B1")).to eq (false)
+
+    game.game_reset
+
+    expect(game.shot_log.include?("B1")).to eq (true)
+  end
+
   # it 'formats player input for cruiser' do
   #   game = Game.new
   #
