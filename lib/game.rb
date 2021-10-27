@@ -44,6 +44,18 @@ class Game
     end
   end
 
+  def game_reset
+    @board_comp = Board.new
+    @board_player = Board.new
+    @cruiser_player = Ship.new("Cruiser", 3)
+    @submarine_player = Ship.new("Submarine", 2)
+    @cruiser_comp = Ship.new("Cruiser", 3)
+    @submarine_comp = Ship.new("Submarine", 2)
+    @player_shot = nil
+    @computer_guess = nil
+    @shot_log = @board_comp.coordinates
+  end
+
   def play_game
     @board_comp.cruiser_placement(@cruiser_comp)
     @board_comp.sub_placement(@submarine_comp)
@@ -61,6 +73,7 @@ class Game
       comp_results
     end
     end_game_message
+    game_reset
     self.starter
   end
 
