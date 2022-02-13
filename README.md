@@ -9,22 +9,29 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ### Background and Description
-"Battleship" is a paired project that 
-- Original Project and Requirements can be found [here](https://github.com/turingschool-examples/battleship).
+"Battleship" is a paired project from Turing School of Software and Design in which students use Ruby to build a game to imitate the board game Battleship. It is built on a smaller scale than the classic game and runs in a REPL interface. The game is played against a simple computer player. 
+
+(<img width="303" alt="Screen Shot 2022-02-13 at 12 31 43" src="https://user-images.githubusercontent.com/84674761/153771511-71e949f0-f410-4707-8a71-6b83d1bf91e9.png">)
+
+Original Project and Requirements can be found [here](https://github.com/turingschool-examples/battleship).
 
 ### Learning Goals
-  *
-  *
-  *
+  * Utilize Test Driven Development
+  * Practice Algorithmic Thinking
+  * Create an Object Oriented solution to a problem without being given full specifications
+  * Use Pull Requests to collaborate with a partner
+
+
 ### Requirements and Setup (for Mac):
   * Ruby Version 2.7.2
+
 
 ### Gems Utilized
   * RSpec
   * Pry
   * SimpleCov
 
-### Setup
+### Setup so you may play!
   1. First clone this repo to your local machine!
     - using ssh key <br>
       ```shell
@@ -37,11 +44,11 @@
   2. Run `gem install bundle` in your terminal
 
 ### Time to play against the computer!
-  1)
-  2)
-  3)
-
-
+  1) In your terminal run `ruby battleship_runner.rb`
+  2) Follow the instructions provided to set up your ships on the board.
+  3) Take your first guess to try and hit a computer's randomly placed ship.
+  4) The computer will take a shot and try and hit a ship.
+  5) Take turns making shots until one of you sinks both ships!  That will determine the winner!
 
 ## **Contributors** ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
