@@ -1,3 +1,5 @@
+# I am currently working on updating this README and editing portions of this project when I have some down time in school.  More to come!
+
 ![Battleship Title](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaVdGbtbXRVW5mHTPMPIYLr4hCykCEmSUGCueLF_dU1j0iFD4m1z1sXRvvPIFx8qrZV1Q&usqp=CAU)
 
 
