@@ -1,5 +1,3 @@
-# I am currently working on updating this README and editing portions of this project when I have some down time in school.  More to come!
-
 ![Battleship Title](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaVdGbtbXRVW5mHTPMPIYLr4hCykCEmSUGCueLF_dU1j0iFD4m1z1sXRvvPIFx8qrZV1Q&usqp=CAU)
 
 
@@ -39,11 +37,7 @@ Original Project and Requirements can be found [here](https://github.com/turings
       ```shell
       $ git clone git@github.com:kbhoffmann/battleship.git
       ```
-    - - using https <br>
-      ```shell
-      $ git clone https://github.com/kbhoffmann/battleship.git
-      ```
-  2. Run `gem install bundle` in your terminal
+  2. Run ```gem install bundle``` in your terminal
 
 ### Time to play against the computer!
   1) In your terminal run `ruby battleship_runner.rb`
