@@ -43,10 +43,10 @@ Original Project and Requirements can be found [here](https://github.com/turings
   1) In your terminal run `ruby battleship_runner.rb`
   2) Follow the instructions provided to set up your ships on the board.
   3) Take your first guess to try and hit a computer's randomly placed ship.
-  4) The computer will take a shot and try and hit a ship.
-  5) Take turns making shots until one of you sinks both ships!  That will determine the winner!
+  4) The computer will take a random shot and try to hit one of your ships.
+  5) Take turns making shots until either you or the computer sinks both ships!  That will determine the winner!
 
-## **Contributors** ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+## **Contributors** 
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -54,7 +54,7 @@ Original Project and Requirements can be found [here](https://github.com/turings
 <table>
   <tr>
     <td align="center"><a href="https://github.com/kbhoffmann"><img src="https://avatars.githubusercontent.com/u/84674761?s=400&u=c9fbc381c9da0cff613eeaa15e2e9f38106dedc4&v=4" width="100px;" alt="https://avatars.githubusercontent.com/u/84674761?s=400&u=c9fbc381c9da0cff613eeaa15e2e9f38106dedc4&v=4"/><br /><sub><b>Kerri (she/her)</b></sub></a><br /><a href="https://github.com/kbhoffmann/battleship/commits?author=kbhoffmann" title="Code">💻</a> <a href="#ideas-kbhoffmann" title="Ideas, Planning, & Feedback">�</a> <a href="https://github.com/kbhoffmann/battleship/commits?author=kbhoffmann" title="Tests">⚠️</a> <a href="https://github.com/kbhoffmann/battleship/pulls?q=is%3Apr+reviewed-by%3kbhoffmann" title="Reviewed Pull Requests">👀</a></td>
-    <td align="center"><a href="https://github.com/dkassin"><img src="" width="100px;" alt="https://avatars.githubusercontent.com/u/84674761?s=400&u=c9fbc381c9da0cff613eeaa15e2e9f38106dedc4&v=4"/><br /><sub><b>David (he/him)</b></sub></a><br /><a href="https://github.com/dkassin/battleship/commits?author=kbhoffmann" title="Code">💻</a> <a href="#ideas-kbhoffmann" title="Ideas, Planning, & Feedback">�</a> <a href="https://github.com/kbhoffmann/battleship/commits?author=kbhoffmann" title="Tests">⚠️</a> <a href="https://github.com/kbhoffmann/battleship/pulls?q=is%3Apr+reviewed-by%3kbhoffmann" title="Reviewed Pull Requests">👀</a></td>
+      <td align="center"><a href="https://github.com/dkassin"><img src="https://avatars.githubusercontent.com/u/76177498?v=4" width="100px;" alt="https://avatars.githubusercontent.com/u/84674761?s=400&u=c9fbc381c9da0cff613eeaa15e2e9f38106dedc4&v=4"/><br /><sub><b>David (he/him)</b></sub></a><br /><a href="https://github.com/dkassin/battleship/commits?author=dkassin" title="Code">💻</a> <a href="#ideas-dkassin" title="Ideas, Planning, & Feedback">�</a> <a href="https://github.com/kbhoffmann/battleship/commits?author=dkassin" title="Tests">⚠️</a> <a href="https://github.com/kbhoffmann/battleship/pulls?q=is%3Apr+reviewed-by%3dkassin" title="Reviewed Pull Requests">👀</a></td>
 </table>
 
 <!-- markdownlint-restore -->
